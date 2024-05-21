@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    // put tab bar here
     var body: some View {
         VStack {
             Image(systemName: "globe")
