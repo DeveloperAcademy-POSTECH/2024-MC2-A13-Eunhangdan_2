@@ -23,7 +23,7 @@ struct BoxesGrid: View {
         // layoutImgStrings에 imgStrings 요소 집어넣기
         for img in imgStrings {
             tmp.append(img)    // img 변수를 tmp 배열에 추가하기
-            if tmp.count >= 3 {    // tmp 배열의 요소가 2개 이상이 되면 블록 실행
+            if tmp.count >= 6 {    // tmp 배열의 요소가 2개 이상이 되면 블록 실행
                 layoutImgStrings.append(tmp)    // tmp 배열을 layoutImgStrings에 추가
                 tmp.removeAll()    // tmp 배열 초기화
             }
@@ -48,9 +48,14 @@ struct BoxesGrid: View {
                     ForEach(layoutImgStrings.indices, id: \.self) { i in    // indices: 내가 읽고 있는 배열의 모든 인덱스를 포함
                         let imgStrings = layoutImgStrings[i]
                         if i % 3 != 2 || imgStrings.count < 3 {
-                            Layout1(imgStrings: imgStrings, viewWidth: viewWidth, spacing: spacing)
+                              Layout1(imgStrings: imgStrings, viewWidth: viewWidth, spacing: spacing)
                         } else{
-                            Layout2(imgStrings: imgStrings, viewWidth: viewWidth, spacing: spacing)
+                            if i % 2 == 0 {
+                                Layout2(imgStrings: imgStrings, viewWidth: viewWidth, spacing: spacing)
+                            } else {
+                                Layout3(imgStrings: imgStrings, viewWidth: viewWidth, spacing: spacing)
+                            }
+                            
                         }
                     }
                     
@@ -62,6 +67,8 @@ struct BoxesGrid: View {
     
     
 }
+
+
 // Main Grid Layout
 struct Layout1: View {
     
@@ -70,16 +77,17 @@ struct Layout1: View {
     let spacing: CGFloat
     
     var body: some View {
-        let height: CGFloat = (viewWidth - (2 * spacing)) / 3
+        let height: CGFloat = (viewWidth - (2 * spacing)) / 2
+        
         return HStack(spacing: spacing) {
             ForEach(imgStrings, id: \.self) {  imgStrings in
                 Image(imgStrings)
                     .resizable()
                     .frame(width: height, height: height)
-                    .scaledToFill()
+                    .scaledToFit()
             }
         }
-        .frame(width: viewWidth, height: height, alignment: .leading)
+        .frame(width: viewWidth, height: height, alignment: .center)
     }
 }
 
@@ -93,21 +101,54 @@ struct Layout2: View {
     var body: some View {
         let smallItemWidth: CGFloat = (viewWidth - (2 * spacing)) / 3
         let height: CGFloat = smallItemWidth * 2 + spacing
+        
         return HStack(spacing: spacing) {
             VStack(spacing: spacing) {
                 Image(imgStrings[0])
                     .resizable()
                     .frame(width: smallItemWidth, height: smallItemWidth)
-                    .scaledToFill()
+                    .scaledToFit()
                 Image(imgStrings[1])
                     .resizable()
                     .frame(width: smallItemWidth, height: smallItemWidth)
-                    .scaledToFill()
+                    .scaledToFit()
             }
             Image(imgStrings[2])
                 .resizable()
                 .frame(width: height, height: height)
-                .scaledToFill()
+                .scaledToFit()
+        }
+        .frame(height: height)
+        
+    }
+}
+
+// Layout 2 -> 경우를 나눠서 두가지 모양이 번갈아 나오게 하기
+struct Layout3: View {
+    
+    let imgStrings: [String]
+    let viewWidth: CGFloat
+    let spacing: CGFloat
+    
+    var body: some View {
+        let smallItemWidth: CGFloat = (viewWidth - (2 * spacing)) / 3
+        let height: CGFloat = smallItemWidth * 2 + spacing
+        
+        return HStack(spacing: spacing) {
+            Image(imgStrings[2])
+                .resizable()
+                .frame(width: height, height: height)
+                .scaledToFit()
+            VStack(spacing: spacing) {
+                Image(imgStrings[0])
+                    .resizable()
+                    .frame(width: smallItemWidth, height: smallItemWidth)
+                    .scaledToFit()
+                Image(imgStrings[1])
+                    .resizable()
+                    .frame(width: smallItemWidth, height: smallItemWidth)
+                    .scaledToFit()
+            }
         }
         .frame(height: height)
         
@@ -115,10 +156,8 @@ struct Layout2: View {
 }
 
 
-struct BoxesGrid_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            BoxesView()
-        }
-    }
+#Preview {
+    BoxesView()
 }
+
+
