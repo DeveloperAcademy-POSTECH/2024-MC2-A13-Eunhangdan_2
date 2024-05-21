@@ -34,6 +34,8 @@
 		40C31E632BFCC2AA001BDB84 /* Brickset-minifigs-owned.csv in Resources */ = {isa = PBXBuildFile; fileRef = 40C31E612BFCC2AA001BDB84 /* Brickset-minifigs-owned.csv */; };
 		40C31E662BFCC2D0001BDB84 /* MinifigureTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C31E642BFCC2D0001BDB84 /* MinifigureTabView.swift */; };
 		40C31E672BFCC2D0001BDB84 /* MinifigureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C31E652BFCC2D0001BDB84 /* MinifigureView.swift */; };
+		40C31E6C2BFCD0F4001BDB84 /* BoxesGrid.swift .swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C31E6B2BFCD0F4001BDB84 /* BoxesGrid.swift .swift */; };
+		40C31E6E2BFCD116001BDB84 /* BoxesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C31E6D2BFCD116001BDB84 /* BoxesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +67,8 @@
 		40C31E612BFCC2AA001BDB84 /* Brickset-minifigs-owned.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Brickset-minifigs-owned.csv"; sourceTree = "<group>"; };
 		40C31E642BFCC2D0001BDB84 /* MinifigureTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinifigureTabView.swift; sourceTree = "<group>"; };
 		40C31E652BFCC2D0001BDB84 /* MinifigureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinifigureView.swift; sourceTree = "<group>"; };
+		40C31E6B2BFCD0F4001BDB84 /* BoxesGrid.swift .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BoxesGrid.swift .swift"; sourceTree = "<group>"; };
+		40C31E6D2BFCD116001BDB84 /* BoxesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,17 +126,9 @@
 		40C31E342BFCC235001BDB84 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				40C31E642BFCC2D0001BDB84 /* MinifigureTabView.swift */,
-				40C31E652BFCC2D0001BDB84 /* MinifigureView.swift */,
-				40C31E5B2BFCC292001BDB84 /* BoxDetailMyMemoryView.swift */,
-				40C31E5A2BFCC292001BDB84 /* BoxDetailTextView.swift */,
-				40C31E592BFCC292001BDB84 /* BoxDetailView.swift */,
-				40C31E352BFCC235001BDB84 /* SearchView.swift */,
-				40C31E362BFCC235001BDB84 /* SearchedMinifigureDetailView.swift */,
-				40C31E372BFCC235001BDB84 /* SearchResultView.swift */,
-				40C31E382BFCC235001BDB84 /* SearchedLEGODetailView.swift */,
-				40C31E392BFCC235001BDB84 /* SeriesDetailView.swift */,
-				40C31E3A2BFCC235001BDB84 /* SeriesView.swift */,
+				40C31E6A2BFCCFD4001BDB84 /* Search */,
+				40C31E692BFCCFC5001BDB84 /* Minifigure */,
+				40C31E682BFCCFB4001BDB84 /* Boxes */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -182,6 +178,40 @@
 				40C31E612BFCC2AA001BDB84 /* Brickset-minifigs-owned.csv */,
 			);
 			path = Datas;
+			sourceTree = "<group>";
+		};
+		40C31E682BFCCFB4001BDB84 /* Boxes */ = {
+			isa = PBXGroup;
+			children = (
+				40C31E5B2BFCC292001BDB84 /* BoxDetailMyMemoryView.swift */,
+				40C31E5A2BFCC292001BDB84 /* BoxDetailTextView.swift */,
+				40C31E592BFCC292001BDB84 /* BoxDetailView.swift */,
+				40C31E6B2BFCD0F4001BDB84 /* BoxesGrid.swift .swift */,
+				40C31E6D2BFCD116001BDB84 /* BoxesView.swift */,
+			);
+			path = Boxes;
+			sourceTree = "<group>";
+		};
+		40C31E692BFCCFC5001BDB84 /* Minifigure */ = {
+			isa = PBXGroup;
+			children = (
+				40C31E642BFCC2D0001BDB84 /* MinifigureTabView.swift */,
+				40C31E652BFCC2D0001BDB84 /* MinifigureView.swift */,
+			);
+			path = Minifigure;
+			sourceTree = "<group>";
+		};
+		40C31E6A2BFCCFD4001BDB84 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				40C31E352BFCC235001BDB84 /* SearchView.swift */,
+				40C31E362BFCC235001BDB84 /* SearchedMinifigureDetailView.swift */,
+				40C31E372BFCC235001BDB84 /* SearchResultView.swift */,
+				40C31E382BFCC235001BDB84 /* SearchedLEGODetailView.swift */,
+				40C31E392BFCC235001BDB84 /* SeriesDetailView.swift */,
+				40C31E3A2BFCC235001BDB84 /* SeriesView.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,6 +289,7 @@
 				40C31E292BFCC1F7001BDB84 /* ContentView.swift in Sources */,
 				40C31E572BFCC274001BDB84 /* Constants.swift in Sources */,
 				40C31E5D2BFCC292001BDB84 /* BoxDetailTextView.swift in Sources */,
+				40C31E6C2BFCD0F4001BDB84 /* BoxesGrid.swift .swift in Sources */,
 				40C31E582BFCC274001BDB84 /* SwiftData + Typealias.swift in Sources */,
 				40C31E402BFCC235001BDB84 /* SeriesView.swift in Sources */,
 				40C31E482BFCC242001BDB84 /* TotalTestView.swift in Sources */,
@@ -274,6 +305,7 @@
 				40C31E462BFCC242001BDB84 /* SwiftDataTestView.swift in Sources */,
 				40C31E4F2BFCC255001BDB84 /* HandleCSV.swift in Sources */,
 				40C31E5C2BFCC292001BDB84 /* BoxDetailView.swift in Sources */,
+				40C31E6E2BFCD116001BDB84 /* BoxesView.swift in Sources */,
 				40C31E3B2BFCC235001BDB84 /* SearchView.swift in Sources */,
 				40C31E3E2BFCC235001BDB84 /* SearchedLEGODetailView.swift in Sources */,
 				40C31E472BFCC242001BDB84 /* NetworkTestView.swift in Sources */,

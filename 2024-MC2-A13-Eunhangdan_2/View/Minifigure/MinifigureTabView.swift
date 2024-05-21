@@ -8,13 +8,15 @@
 import SwiftUI
 struct MinifigureTabView: View {
     @State var scrolledID: UUID?
+    @State private var showMinifigureModal = false // 상태
+    
     @State var items: [minifigureItem] = [
-        .init(minifigureImage: "image65"),
-        .init(minifigureImage: "image65"),
-        .init(minifigureImage: "image65"),
-        .init(minifigureImage: "image65"),
-        .init(minifigureImage: "image65"),
-        .init(minifigureImage: "image65")
+        .init(minifigureImage: "avt011"),
+        .init(minifigureImage: "avt011"),
+        .init(minifigureImage: "avt011"),
+        .init(minifigureImage: "avt011"),
+        .init(minifigureImage: "avt011"),
+        .init(minifigureImage: "avt011")
     ]
     @State var villageImage: [villageItem] = [
         .init(villageImageString: "Village", villageBackGroundColor: .yellow),
@@ -32,7 +34,7 @@ struct MinifigureTabView: View {
     }
     
     var body: some View {
-        NavigationView(){
+        NavigationStack(){
             ScrollView{
                 VStack{
                     HStack(alignment: .bottom){
@@ -42,48 +44,44 @@ struct MinifigureTabView: View {
                         Spacer()
                     }.padding(.leading, textLeftedge)
                     ZStack{
-                        villageCarousel(data: villageImage, itemWidth: 315, activeID: $scrolledID){item, isFocused  in
+                        villageCarousel(data: villageImage, itemWidth: 315, activeID: $scrolledID, showMinifigureModal: $showMinifigureModal){item, isFocused  in
                             VillageView(villageImageString: item.villageImageString, villageBackGroundColor: item.villageBackGroundColor)
                         } // 마을 배경으로 쓰일 이미지 파일만 받도록 수정 필요
                     }.frame(width: 375,height: 245)
                     Spacer(minLength: 30)
+                    // 보여줄 테마 갯수만큼 Foreach로 반복
                     ZStack{
+                        // 조건문 달아서 Rectangle()이 짝수 번에만 생성되게 수정 필요
+                        
                         Rectangle()
                             .foregroundColor(.white)
-                            //.border(Color.black)
+                        //.border(Color.black)
                             .frame(width: 393, height: 207)
                             .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.13), radius: 7.40)
                         VStack{
                             Spacer(minLength: 10)
                             HStack(alignment: .bottom){
-                                Text("Harry Potter") // 짝수 번 테마 이름
-                                    .font(.title2)
-                                    .bold()
-                                Image(systemName: "chevron.right")
-                                    .font(.system(size: 22))
-                                    .foregroundColor(.gray)
+                                // 텍스트 클릭 시 해당 테마로 넘어가는 버튼
+                                Button(action: {
+
+                                }, label: {
+                                    Text("Harry Potter") // 짝수 번 테마 이름
+                                        .font(.title2)
+                                        .bold()
+                                        .tint(.black)
+                                    Image(systemName: "chevron.right")
+                                        .font(.system(size: 22))
+                                        .foregroundColor(.gray)
+                                })
+                                // Modal View
+                                .sheet(isPresented: self.$showMinifigureModal, content: {
+                                    MinifigureModalView()
+                                        .presentationDetents([.medium])
+                                        .presentationDragIndicator(.visible)
+                                })
                                 Spacer()
                             }.padding(.leading, textLeftedge)
-                            Carousel(data: items, itemWidth: 55, activeID: $scrolledID) { item, isFocused in
-                                MinifigureView(minifigureImage: item.minifigureImage, isFocused: isFocused)
-                            } // 미니 피규어 정보 수정 필요
-                            Spacer(minLength: 10)
-                        }.frame(width: 393, height: 180)
-                    }
-                    ZStack{
-                        VStack{
-                            Spacer(minLength: 10)
-                            HStack(alignment: .bottom){
-                                Text("Collectible Minifigures") // 홀수 번 테마 이름
-                                    .font(.title2)
-                                    .bold()
-                                Image(systemName: "chevron.right")
-                                    .font(.system(size: 22))
-                                    .foregroundColor(.gray)
-                                Spacer()
-                            }.padding(.leading, textLeftedge)
-                            Spacer()
-                            Carousel(data: items, itemWidth: 55, activeID: $scrolledID) { item, isFocused in
+                            Carousel(data: items, itemWidth: 55, activeID: $scrolledID, showMinifigureModal: $showMinifigureModal) { item, isFocused in
                                 MinifigureView(minifigureImage: item.minifigureImage, isFocused: isFocused)
                             } // 미니 피규어 정보 수정 필요
                             Spacer(minLength: 10)

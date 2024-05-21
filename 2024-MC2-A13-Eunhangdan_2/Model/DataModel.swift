@@ -50,7 +50,8 @@ enum ModelSchemaV1: VersionedSchema {
         var pieces: Int // 피스 수
         var isAssembled: Bool // 조립 여부
         var price: Double // USD 가격
-        var minifigureCount: Int // 미니피규어 개수 (없다면 0으로)
+        // var minifigureCount: Int // 미니피규어 개수 (없다면 0으로)
+        var minifigureIdList: [String] // 미니피규어 아이디 리스트
         var setImageURL: String // 세트 이미지
         var isFavorite: Bool // 즐겨찾기 여부
         var isOwned: Bool // 보유 여부
@@ -60,7 +61,7 @@ enum ModelSchemaV1: VersionedSchema {
         var releasedDate: Int // 출시연도
         var discontinuedDate : Date? // 단종일
         
-        init(setID: String, theme: String, subtheme: String, setName: String, pieces: Int, isAssembled: Bool, price: Double, minifigureCount: Int, setImageURL: String, isFavorite: Bool, isOwned: Bool, photos: [Photo], purchaseDate: Date, releasedDate: Int, discontinuedDate: Date? = nil) {
+        init(setID: String, theme: String, subtheme: String, setName: String, pieces: Int, isAssembled: Bool, price: Double, minifigureIdList: [String] = [], setImageURL: String, isFavorite: Bool, isOwned: Bool, photos: [Photo], purchaseDate: Date, releasedDate: Int, discontinuedDate: Date? = nil) {
             self.setID = setID
             self.theme = theme
             self.subtheme = subtheme
@@ -68,7 +69,7 @@ enum ModelSchemaV1: VersionedSchema {
             self.pieces = pieces
             self.isAssembled = isAssembled
             self.price = price
-            self.minifigureCount = minifigureCount
+            self.minifigureIdList = minifigureIdList
             self.setImageURL = setImageURL
             self.isFavorite = isFavorite
             self.isOwned = isOwned
@@ -91,11 +92,12 @@ enum ModelSchemaV1: VersionedSchema {
             } else {
                 self.price = 0
             }
-            if raw[5] != "" {
-                self.minifigureCount = Int(raw[5])!
-            } else {
-                self.minifigureCount = 0
-            }
+//            if raw[5] != "" {
+//                self.minifigureCount = Int(raw[5])!
+//            } else {
+//                self.minifigureCount = 0
+//            }
+            self.minifigureIdList = []
             self.setImageURL = ""
             self.isFavorite = false
             self.isOwned = true
@@ -109,10 +111,9 @@ enum ModelSchemaV1: VersionedSchema {
         convenience init(brickSet: BrickSetApiModel.Set) {
             let subtheme = brickSet.subtheme != nil ? brickSet.subtheme! : ""
             let pieces = brickSet.pieces != nil ? brickSet.pieces! : 0
-            let minifigs = brickSet.minifigs != nil ? brickSet.minifigs! : 0
             let price = brickSet.legoCOM.us.retailPrice != nil ? brickSet.legoCOM.us.retailPrice! : 0.0
             
-            self.init(setID: String(brickSet.setID), theme: brickSet.theme, subtheme: subtheme, setName: brickSet.name, pieces:pieces, isAssembled: false, price: price, minifigureCount: minifigs, setImageURL: brickSet.image.imageURL, isFavorite: false, isOwned: false, photos: [], purchaseDate: Date(), releasedDate: brickSet.year)
+            self.init(setID: String(brickSet.setID), theme: brickSet.theme, subtheme: subtheme, setName: brickSet.name, pieces:pieces, isAssembled: false, price: price, minifigureIdList: [], setImageURL: brickSet.image.imageURL, isFavorite: false, isOwned: false, photos: [], purchaseDate: Date(), releasedDate: brickSet.year)
         }
     }
     

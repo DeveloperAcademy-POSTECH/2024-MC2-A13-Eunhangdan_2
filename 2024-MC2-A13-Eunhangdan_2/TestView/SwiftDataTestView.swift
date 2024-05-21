@@ -1,3 +1,4 @@
+
 //
 //  SwiftDataTestView.swift
 //  EunhaengdanVol1
@@ -31,12 +32,28 @@ struct SwiftDataTestView: View {
             
             List {
                 ForEach(brickSets, id: \.setID) { set in
-                    HStack{
-                        Text("구매 시간 : ")
-                        Text("\(set.purchaseDate, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                        Spacer()
+                    VStack{
+                        HStack{
+                            Text("구매 시간 : ")
+                            Text("\(set.purchaseDate, format: Date.FormatStyle(date: .numeric, time: .standard))")
+                            Spacer()
+                        }
+                        .padding(8)
+                        
+                        HStack{
+                            Text("세트 이름 : \(set.setName)")
+                            Spacer()
+                        }
+                        .padding(8)
+                        
+                        HStack{
+                            if !set.minifigureIdList.isEmpty {
+                                Text("포함된 미니피규어 : \(set.minifigureIdList[0] )")
+                                Spacer()
+                            }
+                        }
+                        .padding(8)
                     }
-                    .padding(8)
                 }
                 .onDelete(perform: deleteBrickSet)
                 
@@ -48,7 +65,7 @@ struct SwiftDataTestView: View {
                 ToolbarItem {
                     Button(action: {
                         
-                        let set = BrickSet(setID: String(Int.random(in: 1...210000000)), theme: "", subtheme: "", setName: "", pieces: 0, isAssembled: true, price: 0.0, minifigureCount: 0, setImageURL: "", isFavorite: true, isOwned: true, photos: [], purchaseDate: Date(), releasedDate: 0)
+                        let set = BrickSet(setID: String(Int.random(in: 1...210000000)), theme: "", subtheme: "", setName: "", pieces: 0, isAssembled: true, price: 0.0, minifigureIdList: [], setImageURL: "", isFavorite: true, isOwned: true, photos: [], purchaseDate: Date(), releasedDate: 0)
                         createBrickSet(set)
                     }) {
                         Label("Add Item", systemImage: "plus")
@@ -113,7 +130,7 @@ struct SwiftDataTestView: View {
     
     // 임시 데이터 추가
     for i in 1..<5 {
-        let brickSet = BrickSet(setID: String(i + 10), theme: "", subtheme: "", setName: "", pieces: 0, isAssembled: true, price: 0.0, minifigureCount: 0, setImageURL: "", isFavorite: true, isOwned: true, photos: [], purchaseDate: Date(), releasedDate: 0)
+        let brickSet = BrickSet(setID: String(i + 10), theme: "", subtheme: "", setName: "", pieces: 0, isAssembled: true, price: 0.0, minifigureIdList: [], setImageURL: "", isFavorite: true, isOwned: true, photos: [], purchaseDate: Date(), releasedDate: 0)
         container.mainContext.insert(brickSet)
     }
     

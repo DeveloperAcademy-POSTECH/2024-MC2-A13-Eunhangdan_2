@@ -22,8 +22,8 @@ struct Carousel<Content: View, Items: RandomAccessCollection>: View where Items.
     var data: Items
     var itemWidth: CGFloat
     @Binding var activeID: UUID?
+    @Binding var showMinifigureModal: Bool
     @ViewBuilder var content: (Items.Element, Bool) -> Content
-    
     var body: some View {
         GeometryReader {
             let size = $0.size
@@ -32,16 +32,20 @@ struct Carousel<Content: View, Items: RandomAccessCollection>: View where Items.
                     LazyHStack(alignment: .center) {
                         ForEach(data) { item in
                             let isFocused = isItemFocused(item)
-                            content(item, isFocused)
-                                .frame(width: itemWidth)
+                            Button(action: {
+                                showMinifigureModal = true
+                            }, label: {
+                                content(item, isFocused)
+                                    .frame(width: itemWidth)
                                 // .border(.black, width: 1)
-                                .scrollTransition { content, phase in
-                                    content
-                                        .scaleEffect(
-                                            x: determineScaleEffect(phase.isIdentity),
-                                            y: determineScaleEffect(phase.isIdentity)
-                                        )
-                                }
+                                    .scrollTransition { content, phase in
+                                        content
+                                            .scaleEffect(
+                                                x: determineScaleEffect(phase.isIdentity),
+                                                y: determineScaleEffect(phase.isIdentity)
+                                            )
+                                    }
+                            })
                         }
                         .padding(10)
                     }
@@ -68,6 +72,7 @@ struct villageCarousel<Content: View, Items: RandomAccessCollection>: View where
     var data: Items
     var itemWidth: CGFloat
     @Binding var activeID: UUID?
+    @Binding var showMinifigureModal: Bool
     @ViewBuilder var content: (Items.Element, Bool) -> Content
     
     var body: some View {
@@ -78,8 +83,14 @@ struct villageCarousel<Content: View, Items: RandomAccessCollection>: View where
                     LazyHStack(alignment: .center) {
                         ForEach(data) { item in
                             let isFocused = isItemFocused(item)
-                            content(item, isFocused)
-                                .frame(width: itemWidth)
+                            // 테마별로 클릭 시 해당 마을 꾸미기로 넘어감
+                            Button(action: {
+                                
+                            }, label: {
+                                content(item, isFocused)
+                                    .frame(width: itemWidth)
+                            })
+                            
                         }
                         .padding(10)
                     }
@@ -107,7 +118,7 @@ struct MinifigureView: View {
                 .resizable()
                 .font(.body)
                 .bold(isFocused)
-                .frame(width: 74, height: 104)
+                .frame(width: 64, height: 104)
         }
     }
 }
@@ -121,9 +132,9 @@ struct VillageView: View{
             ZStack{
                 RoundedRectangle(cornerRadius: 12.0)
                     .fill(AngularGradient(gradient: Gradient(colors: [Color.white, Color(villageBackGroundColor)]),
-                                                    center: .topLeading,
-                                                    angle: .degrees(120))
-                                )
+                                          center: .topLeading,
+                                          angle: .degrees(120))
+                    )
                     .frame(width: 330, height: 226)
                     .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.25), radius: 5, y: 1)
                 Image(villageImageString)
@@ -134,6 +145,77 @@ struct VillageView: View{
     }
 }
 
+//MARK: - 미니피규어 모달 정보창 구현 뷰
+struct MinifigureModalView: View{
+    //to dismiss sheet
+    
+    var body: some View {
+        VStack{
+            Spacer(minLength: 16.5)
+            HStack(){
+                Text("Minifigure Detail")
+                    .font(.title2)
+                    .bold()
+                    .padding(.leading, 16)
+                    .multilineTextAlignment(.leading)
+                Spacer()
+            }
+            Spacer(minLength: 25)
+            HStack(){
+                Spacer(minLength: 24)
+                Image("avt011")
+                    .resizable()
+                    .frame(width: 83, height: 131)
+                Spacer(minLength: 28)
+                VStack{
+                    HStack(){
+                        Text("Herry Poter")
+                            .font(.title3)
+                            .padding(.bottom, 22)
+                        Spacer()
+                    }
+                    HStack(){
+                        Text("Pro.Num:")
+                            .multilineTextAlignment(.leading)
+                        Spacer()
+                        Text("Herry Poter")
+                            .multilineTextAlignment(.leading)
+                            .padding(.horizontal)
+                    }
+                    HStack(){
+                    Text("Pro.Name:")
+                        .multilineTextAlignment(.leading)
+                        Spacer()
+                        Text("Herry Poter")
+                            .multilineTextAlignment(.leading)
+                            .padding(.horizontal)
+                    }
+                    HStack(){
+                    Text("Release Date:")
+                        .multilineTextAlignment(.leading)
+                        Spacer()
+                        Text("Herry Poter")
+                            .multilineTextAlignment(.leading)
+                            .padding(.horizontal)
+                    }
+                }
+            }
+            Spacer()
+            HStack(){
+                Text("Series")
+                    .font(.title2)
+                    .bold()
+                    .padding(.leading, 16)
+                    .padding(.top, 16.5)
+                    .multilineTextAlignment(.leading)
+                Spacer()
+            }
+            Rectangle()
+                .fill(Color(.gray).opacity(0.3))
+                .frame(width: 393, height: 156)
+        }
+    }
+}
 
 #Preview {
     MinifigureTabView()
