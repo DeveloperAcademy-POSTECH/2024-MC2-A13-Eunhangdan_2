@@ -70,6 +70,9 @@ Carthage/Build/
 Dependencies/
 .accio/
 
+# Desktop Service Store related
+.DS_Store
+
 # fastlane
 #
 # It is recommended to not store the screenshots in the git repo.
@@ -88,3 +91,5 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+
+
