@@ -4,15 +4,15 @@
 //
 //  Created by yoomin on 5/19/24.
 //
+// Andrew 추가 작업
+// 1. SwiftData에서 데이터 불러오기
 
 import SwiftUI
+import SwiftData
 
 struct BoxesGrid: View {
-    
 
-    
     // View 안에서의 상태 체크 인자 (Bool)
-    
     let layoutImgStrings: [[String]]    // 2차원 배열 'layoutImgStrings' 선언
     var spacing: CGFloat
     
@@ -21,9 +21,9 @@ struct BoxesGrid: View {
         var tmp = [String]() // 빈 문자열 배열 'tmp' 선언
         
         // layoutImgStrings에 imgStrings 요소 집어넣기
-        for img in imgStrings {
-            tmp.append(img)    // img 변수를 tmp 배열에 추가하기
-            if tmp.count >= 6 {    // tmp 배열의 요소가 2개 이상이 되면 블록 실행
+        for imgString in imgStrings {
+            tmp.append(imgString)    // img 변수를 tmp 배열에 추가하기
+            if tmp.count >= 7 {    // tmp 배열의 요소가 2개 이상이 되면 블록 실행
                 layoutImgStrings.append(tmp)    // tmp 배열을 layoutImgStrings에 추가
                 tmp.removeAll()    // tmp 배열 초기화
             }
@@ -36,31 +36,42 @@ struct BoxesGrid: View {
         
         self.layoutImgStrings = layoutImgStrings
         self.spacing = spacing
-        
     }
     
     var body: some View {
         GeometryReader { reader in
             ScrollView(showsIndicators: false) {
+                Divider()
                 VStack(spacing: spacing) {
                     let viewWidth: CGFloat = reader.size.width
                     
                     ForEach(layoutImgStrings.indices, id: \.self) { i in    // indices: 내가 읽고 있는 배열의 모든 인덱스를 포함
                         let imgStrings = layoutImgStrings[i]
-                        if i % 3 != 2 || imgStrings.count < 3 {
-                              Layout1(imgStrings: imgStrings, viewWidth: viewWidth, spacing: spacing)
-                        } else{
-                            if i % 2 == 0 {
-                                Layout2(imgStrings: imgStrings, viewWidth: viewWidth, spacing: spacing)
-                            } else {
-                                Layout3(imgStrings: imgStrings, viewWidth: viewWidth, spacing: spacing)
+                        // 7개 미만으로 남은 배열 요소에 대한 처리
+                        if imgStrings.count < 7 {
+                            // 2개씩 넣고, 마지막에는 1개 or 2개
+                            ForEach(0..<imgStrings.count, id: \.self) { index in
+                                if index % 2 == 0 {
+                                    let endIndex = min(index + 1, imgStrings.count - 1)
+                                    Layout1(imgStrings: Array(imgStrings[index...endIndex]), viewWidth: viewWidth, spacing: spacing)
+                                }
                             }
-                            
+                        } else {
+                            // 0 ~ 3번 요소
+                            Layout1(imgStrings: Array(imgStrings[0...1]), viewWidth: viewWidth, spacing: spacing)
+                            Layout1(imgStrings: Array(imgStrings[2...3]), viewWidth: viewWidth, spacing: spacing)
+                            // i가 홀수일 때, 짝수일 때 (가장 아래 뷰가 어떻게 될지)
+                            if i % 2 == 0 {
+                                // 짝수일 때, 4 ~ 7번 요소
+                                Layout2(imgStrings: Array(imgStrings[4...6]), viewWidth: viewWidth, spacing: spacing)
+                            } else {
+                                // 홀수일 때, 4 ~ 7번 요소
+                                Layout3(imgStrings: Array(imgStrings[4...6]), viewWidth: viewWidth, spacing: spacing)
+                            }
                         }
                     }
                     
-                }
-            }
+                }            }
         }
         
     }
@@ -80,11 +91,8 @@ struct Layout1: View {
         let height: CGFloat = (viewWidth - (2 * spacing)) / 2
         
         return HStack(spacing: spacing) {
-            ForEach(imgStrings, id: \.self) {  imgStrings in
-                Image(imgStrings)
-                    .resizable()
-                    .frame(width: height, height: height)
-                    .scaledToFit()
+            ForEach(imgStrings, id: \.self) {  imgString in
+                NavigationImage(imgString: imgString, height: height)
             }
         }
         .frame(width: viewWidth, height: height, alignment: .center)
@@ -104,19 +112,10 @@ struct Layout2: View {
         
         return HStack(spacing: spacing) {
             VStack(spacing: spacing) {
-                Image(imgStrings[0])
-                    .resizable()
-                    .frame(width: smallItemWidth, height: smallItemWidth)
-                    .scaledToFit()
-                Image(imgStrings[1])
-                    .resizable()
-                    .frame(width: smallItemWidth, height: smallItemWidth)
-                    .scaledToFit()
+                NavigationImage(imgString: imgStrings[0], height: smallItemWidth)
+                NavigationImage(imgString: imgStrings[1], height: smallItemWidth)
             }
-            Image(imgStrings[2])
-                .resizable()
-                .frame(width: height, height: height)
-                .scaledToFit()
+            NavigationImage(imgString: imgStrings[2], height: height)
         }
         .frame(height: height)
         
@@ -135,29 +134,37 @@ struct Layout3: View {
         let height: CGFloat = smallItemWidth * 2 + spacing
         
         return HStack(spacing: spacing) {
-            Image(imgStrings[2])
-                .resizable()
-                .frame(width: height, height: height)
-                .scaledToFit()
+            NavigationImage(imgString: imgStrings[2], height: height)
             VStack(spacing: spacing) {
-                Image(imgStrings[0])
-                    .resizable()
-                    .frame(width: smallItemWidth, height: smallItemWidth)
-                    .scaledToFit()
-                Image(imgStrings[1])
-                    .resizable()
-                    .frame(width: smallItemWidth, height: smallItemWidth)
-                    .scaledToFit()
+                NavigationImage(imgString: imgStrings[0], height: smallItemWidth)
+                NavigationImage(imgString: imgStrings[1], height: smallItemWidth)
             }
         }
-        .frame(height: height)
-        
     }
 }
 
+struct NavigationImage: View {
+    let imgString: String
+    let height: CGFloat
+    
+    var body: some View {
+        NavigationLink(destination:{
+            BoxDetailView(brickSetID: imgString)
+        }) {
+            Image(imgString)
+                .resizable()
+                .frame(width: height, height: height)
+                .scaledToFit()
+        }
+    }
+}
 
 #Preview {
-    BoxesView()
+    let str = ["avt008", "avt009", "avt010", "avt011", "avt011", "bio001", "bio002",
+               "bio003", "bio004", "bio005", "bio006", "avt008", "avt009", "avt010",
+               "avt011", "avt011", "bio001", "bio002", "bio003", "bio004", "bio005",
+               "bio006", "bio007", "bio008"]
+    return BoxesGrid(imgStrings: str)
 }
 
 

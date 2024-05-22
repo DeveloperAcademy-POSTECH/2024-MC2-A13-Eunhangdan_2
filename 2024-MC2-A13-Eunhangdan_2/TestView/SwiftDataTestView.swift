@@ -16,9 +16,17 @@ struct SwiftDataTestView: View {
     // 워드 작업을 하는 창(되돌리기 등) = context
     @Environment (\.modelContext) private var modelContext
     // @Query 어노테이션을 이용해서 container에 데이터를 불러올 수 있음 (get only)
-    @Query(sort: \BrickSet.setID, order: .reverse) var brickSets: [BrickSet]
-
+    @Query(sort: \BrickSet.setName) var brickSets: [BrickSet]
     
+//    var bricks: [BrickSet]
+//
+//    init(setID: String){
+//        @Query(filter: #Predicate<BrickSet> { brickSet in
+//            brickSet.setID == setID
+//        }, sort: \BrickSet.setName) var bricks: [BrickSet]
+//        self.bricks.append(bricks[0])
+//        self.bricks.append(bricks[1])
+//    }
     
     var body: some View {
         NavigationSplitView {

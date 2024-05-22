@@ -9,8 +9,10 @@ import SwiftUI
 import PhotosUI
 
 struct BoxDetailMyMemoryView: View {
+    @Environment (\.modelContext) private var modelContext
     @State private var selectedItems = [PhotosPickerItem]()
     @State private var selectedImages = [Image]()
+    var brickSet: BrickSet
     
     var body: some View {
         NavigationStack {
@@ -31,8 +33,8 @@ struct BoxDetailMyMemoryView: View {
                 }
                 .padding()
                 LazyVStack {
-                    ForEach(0..<selectedImages.count, id: \.self) { mymemory in
-                        selectedImages[mymemory]
+                    ForEach(0..<selectedImages.count, id: \.self) { myMemory in
+                        selectedImages[myMemory]
                             .resizable()
                             .scaledToFit()
                             .frame(width: 321)
@@ -52,10 +54,26 @@ struct BoxDetailMyMemoryView: View {
                     }
                 }
             }
+            .onDisappear(perform: {
+                for img in selectedItems {
+                    // Image를 Data 타입으로 변환해서 BrickSet의 photo에 저장
+                    // brickSet.photos.append(ModelSchemaV1.Photo.init(photo:  ))
+                    
+                    
+                }
+                do {
+                    modelContext.insert(brickSet)
+                    try modelContext.save()
+                } catch {
+                    print("Error: failed to save photos in SwiftData")
+                }
+            })
         }
     }
+    
+   
 }
 
 #Preview {
-    BoxDetailMyMemoryView()
+    BoxDetailMyMemoryView(brickSet: BrickSet(setID: "bio001", theme: "", subtheme: "", setName: "해골 레고", pieces: 0, isAssembled: true, price: 0.0, setImageURL: "", isFavorite: true, isOwned: true, photos: [], purchaseDate: Date(), releasedDate: 0))
 }

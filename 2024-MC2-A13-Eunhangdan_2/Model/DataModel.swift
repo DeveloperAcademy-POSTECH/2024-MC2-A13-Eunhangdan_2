@@ -84,7 +84,6 @@ enum ModelSchemaV1: VersionedSchema {
             self.theme = raw[1]
             self.subtheme = raw[2]
             self.setName = raw[4]
-            
             self.pieces = Int(raw[6])!
             self.isAssembled = true
             if raw[8] != "" {
@@ -92,11 +91,6 @@ enum ModelSchemaV1: VersionedSchema {
             } else {
                 self.price = 0
             }
-//            if raw[5] != "" {
-//                self.minifigureCount = Int(raw[5])!
-//            } else {
-//                self.minifigureCount = 0
-//            }
             self.minifigureIdList = []
             self.setImageURL = ""
             self.isFavorite = false
