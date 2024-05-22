@@ -9,14 +9,13 @@ import SwiftUI
 
 struct BoxDetailTextView: View {
     
-    let images = ["legoex1", "legoex2", "legoex3"]
-    
+    let brickSet: BrickSet
     
     var body: some View {
         
         ScrollView {
             VStack(alignment: .leading){
-                Image("boximage")
+                Image(brickSet.setID)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 346)
@@ -27,7 +26,7 @@ struct BoxDetailTextView: View {
                 Button(action: {
                     // 버튼이 눌렸을 때 실행될 코드
                 }) {
-                    Text("lego series name plz")
+                    Text("\(brickSet.theme)")
                         .textCase(.uppercase)
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(.black)
@@ -36,7 +35,7 @@ struct BoxDetailTextView: View {
                 Spacer()
                     .frame(height: 14)
                 
-                Text("Bounty Hunter PURSUIT")
+                Text("\(brickSet.setName)")
                     .font(.title.weight(.semibold))
                 
                 Spacer()
@@ -50,13 +49,13 @@ struct BoxDetailTextView: View {
                 HStack{
                     Text("Sale Price:")
                         .foregroundColor(.gray)
-                    Text("$30")
+                    Text("$\(brickSet.price)")
                         .font(.subheadline)
                 }
                 HStack{
                     Text("Bricks:")
                         .foregroundColor(.gray)
-                    Text("259")
+                    Text("\(brickSet.pieces)")
                         .font(.subheadline)
                 }
                 Spacer()
@@ -71,7 +70,7 @@ struct BoxDetailTextView: View {
                 
                 ScrollView(.horizontal, showsIndicators: false){
                     HStack(spacing: 30) {
-                        ForEach(images, id: \.self) { imageName in
+                        ForEach(brickSet.minifigureIdList, id: \.self) { imageName in
                             Image(imageName)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
@@ -99,7 +98,10 @@ struct BoxDetailTextView: View {
 
 #Preview {
     NavigationStack() {
-        BoxDetailTextView()
+        BoxDetailTextView(brickSet:
+                            BrickSet(setID: "bio001", theme: "무적 시리즈", subtheme: "", setName: "해골 레고", pieces: 0, isAssembled: true, price: 0.0, setImageURL: "", isFavorite: true, isOwned: true, photos: [], purchaseDate: Date(), releasedDate: 0)
+        )
+
     }
     
 }
