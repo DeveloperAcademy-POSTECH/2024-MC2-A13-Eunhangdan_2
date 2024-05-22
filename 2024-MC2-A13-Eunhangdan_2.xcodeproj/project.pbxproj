@@ -34,6 +34,10 @@
 		40C31E632BFCC2AA001BDB84 /* Brickset-minifigs-owned.csv in Resources */ = {isa = PBXBuildFile; fileRef = 40C31E612BFCC2AA001BDB84 /* Brickset-minifigs-owned.csv */; };
 		40C31E662BFCC2D0001BDB84 /* MinifigureTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C31E642BFCC2D0001BDB84 /* MinifigureTabView.swift */; };
 		40C31E672BFCC2D0001BDB84 /* MinifigureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C31E652BFCC2D0001BDB84 /* MinifigureView.swift */; };
+		5B19C71A2BFE533F00AC0404 /* NewLEGO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B19C7192BFE533F00AC0404 /* NewLEGO.swift */; };
+		5B19C71C2BFE534A00AC0404 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B19C71B2BFE534A00AC0404 /* AddButton.swift */; };
+		5B19C71E2BFE535600AC0404 /* SearchLEGOBoxForAdding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B19C71D2BFE535600AC0404 /* SearchLEGOBoxForAdding.swift */; };
+		5B19C7202BFE536900AC0404 /* EmptySearchResultScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B19C71F2BFE536900AC0404 /* EmptySearchResultScreen.swift */; };
 		7D4FD32D2BFCD5880032A839 /* BoxesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4FD32C2BFCD5880032A839 /* BoxesView.swift */; };
 		7D4FD32F2BFCD5A00032A839 /* BoxesGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4FD32E2BFCD5A00032A839 /* BoxesGrid.swift */; };
 /* End PBXBuildFile section */
@@ -67,6 +71,10 @@
 		40C31E612BFCC2AA001BDB84 /* Brickset-minifigs-owned.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Brickset-minifigs-owned.csv"; sourceTree = "<group>"; };
 		40C31E642BFCC2D0001BDB84 /* MinifigureTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinifigureTabView.swift; sourceTree = "<group>"; };
 		40C31E652BFCC2D0001BDB84 /* MinifigureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinifigureView.swift; sourceTree = "<group>"; };
+		5B19C7192BFE533F00AC0404 /* NewLEGO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLEGO.swift; sourceTree = "<group>"; };
+		5B19C71B2BFE534A00AC0404 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
+		5B19C71D2BFE535600AC0404 /* SearchLEGOBoxForAdding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLEGOBoxForAdding.swift; sourceTree = "<group>"; };
+		5B19C71F2BFE536900AC0404 /* EmptySearchResultScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySearchResultScreen.swift; sourceTree = "<group>"; };
 		7D4FD32C2BFCD5880032A839 /* BoxesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxesView.swift; sourceTree = "<group>"; };
 		7D4FD32E2BFCD5A00032A839 /* BoxesGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxesGrid.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -183,6 +191,7 @@
 		40C31E682BFCCFB4001BDB84 /* Boxes */ = {
 			isa = PBXGroup;
 			children = (
+				5B19C7182BFE532800AC0404 /* BoxAddingView */,
 				40C31E5B2BFCC292001BDB84 /* BoxDetailMyMemoryView.swift */,
 				40C31E5A2BFCC292001BDB84 /* BoxDetailTextView.swift */,
 				40C31E592BFCC292001BDB84 /* BoxDetailView.swift */,
@@ -212,6 +221,17 @@
 				40C31E3A2BFCC235001BDB84 /* SeriesView.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		5B19C7182BFE532800AC0404 /* BoxAddingView */ = {
+			isa = PBXGroup;
+			children = (
+				5B19C71B2BFE534A00AC0404 /* AddButton.swift */,
+				5B19C7192BFE533F00AC0404 /* NewLEGO.swift */,
+				5B19C71D2BFE535600AC0404 /* SearchLEGOBoxForAdding.swift */,
+				5B19C71F2BFE536900AC0404 /* EmptySearchResultScreen.swift */,
+			);
+			path = BoxAddingView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -300,17 +320,21 @@
 				40C31E3F2BFCC235001BDB84 /* SeriesDetailView.swift in Sources */,
 				40C31E492BFCC242001BDB84 /* HandleCSVTestView.swift in Sources */,
 				40C31E4E2BFCC255001BDB84 /* DataModel.swift in Sources */,
+				5B19C7202BFE536900AC0404 /* EmptySearchResultScreen.swift in Sources */,
 				40C31E662BFCC2D0001BDB84 /* MinifigureTabView.swift in Sources */,
 				7D4FD32D2BFCD5880032A839 /* BoxesView.swift in Sources */,
 				40C31E672BFCC2D0001BDB84 /* MinifigureView.swift in Sources */,
 				40C31E462BFCC242001BDB84 /* SwiftDataTestView.swift in Sources */,
 				40C31E4F2BFCC255001BDB84 /* HandleCSV.swift in Sources */,
+				5B19C71A2BFE533F00AC0404 /* NewLEGO.swift in Sources */,
 				40C31E5C2BFCC292001BDB84 /* BoxDetailView.swift in Sources */,
+				5B19C71C2BFE534A00AC0404 /* AddButton.swift in Sources */,
 				40C31E3B2BFCC235001BDB84 /* SearchView.swift in Sources */,
 				40C31E3E2BFCC235001BDB84 /* SearchedLEGODetailView.swift in Sources */,
 				40C31E472BFCC242001BDB84 /* NetworkTestView.swift in Sources */,
 				40C31E272BFCC1F7001BDB84 /* EunhangdanVol2.swift in Sources */,
 				40C31E3D2BFCC235001BDB84 /* SearchResultView.swift in Sources */,
+				5B19C71E2BFE535600AC0404 /* SearchLEGOBoxForAdding.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
