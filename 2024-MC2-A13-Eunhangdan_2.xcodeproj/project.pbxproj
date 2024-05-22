@@ -82,6 +82,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		333769F12BFE359F008D840E /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
 		40C31E1A2BFCC1F7001BDB84 = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +135,7 @@
 			children = (
 				40C31E6A2BFCCFD4001BDB84 /* Search */,
 				40C31E692BFCCFC5001BDB84 /* Minifigure */,
+				333769F12BFE359F008D840E /* MyPage */,
 				40C31E682BFCCFB4001BDB84 /* Boxes */,
 			);
 			path = View;
@@ -444,9 +452,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"2024-MC2-A13-Eunhangdan_2/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 6FFZZTFJHB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 권한 허용";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -473,9 +482,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"2024-MC2-A13-Eunhangdan_2/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 6FFZZTFJHB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 권한 허용";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

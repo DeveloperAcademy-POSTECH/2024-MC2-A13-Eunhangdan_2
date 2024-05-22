@@ -60,7 +60,6 @@ struct BoxesGrid: View {
                             // 0 ~ 3번 요소
                             Layout1(imgStrings: Array(imgStrings[0...1]), viewWidth: viewWidth, spacing: spacing)
                             Layout1(imgStrings: Array(imgStrings[2...3]), viewWidth: viewWidth, spacing: spacing)
-                            // i가 홀수일 때, 짝수일 때 (가장 아래 뷰가 어떻게 될지)
                             if i % 2 == 0 {
                                 // 짝수일 때, 4 ~ 7번 요소
                                 Layout2(imgStrings: Array(imgStrings[4...6]), viewWidth: viewWidth, spacing: spacing)
@@ -101,7 +100,6 @@ struct Layout1: View {
 
 // Layout 2 -> 경우를 나눠서 두가지 모양이 번갈아 나오게 하기
 struct Layout2: View {
-    
     let imgStrings: [String]
     let viewWidth: CGFloat
     let spacing: CGFloat
@@ -118,7 +116,6 @@ struct Layout2: View {
             NavigationImage(imgString: imgStrings[2], height: height)
         }
         .frame(height: height)
-        
     }
 }
 
