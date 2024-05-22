@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		33AD6C252BFE8B9F0083E8AC /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AD6C242BFE8B9F0083E8AC /* MyPageView.swift */; };
 		40C31E272BFCC1F7001BDB84 /* EunhangdanVol2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C31E262BFCC1F7001BDB84 /* EunhangdanVol2.swift */; };
 		40C31E292BFCC1F7001BDB84 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C31E282BFCC1F7001BDB84 /* ContentView.swift */; };
 		40C31E2B2BFCC1F7001BDB84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40C31E2A2BFCC1F7001BDB84 /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		33AD6C242BFE8B9F0083E8AC /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		40C31E232BFCC1F7001BDB84 /* 2024-MC2-A13-Eunhangdan_2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "2024-MC2-A13-Eunhangdan_2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		40C31E262BFCC1F7001BDB84 /* EunhangdanVol2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EunhangdanVol2.swift; sourceTree = "<group>"; };
 		40C31E282BFCC1F7001BDB84 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 		333769F12BFE359F008D840E /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
+				33AD6C242BFE8B9F0083E8AC /* MyPageView.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				40C31E492BFCC242001BDB84 /* HandleCSVTestView.swift in Sources */,
 				40C31E4E2BFCC255001BDB84 /* DataModel.swift in Sources */,
 				40C31E662BFCC2D0001BDB84 /* MinifigureTabView.swift in Sources */,
+				33AD6C252BFE8B9F0083E8AC /* MyPageView.swift in Sources */,
 				7D4FD32D2BFCD5880032A839 /* BoxesView.swift in Sources */,
 				40C31E672BFCC2D0001BDB84 /* MinifigureView.swift in Sources */,
 				40C31E462BFCC242001BDB84 /* SwiftDataTestView.swift in Sources */,
