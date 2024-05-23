@@ -4,7 +4,7 @@ import SwiftUI
 struct AddButton: View {
     @State private var isPresented: Bool = false
     @State var searchText: String = ""
-    @State var selectedProductNumber: Int
+    @State var selectedProductNumber: Int = 0
     
     var body: some View {
         Button(action: {
@@ -13,7 +13,7 @@ struct AddButton: View {
             Text("+")
         })
         .sheet(isPresented: $isPresented, content: {
-            NewLEGO(isPresented: $isPresented, searchText: $searchText, selectedProductNumber: $selectedProductNumber)
+            NewLEGO()
         })
         
     }
@@ -21,5 +21,5 @@ struct AddButton: View {
 }
 
 #Preview {
-    AddButton(searchText: "", selectedProductNumber: 6000)
+    AddButton()
 }

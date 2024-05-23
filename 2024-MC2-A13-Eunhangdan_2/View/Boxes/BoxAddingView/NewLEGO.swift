@@ -3,16 +3,20 @@ import SwiftUI
 import SwiftData
 
 struct NewLEGO: View {
+    
+    
     @State var isAssembled: Bool = false
-    @Binding var isPresented: Bool
+    @Environment(\.presentationMode) var presentationMode
     @State private var date = Date()
     @State private var isSearchSelected: Bool = false
     @State private var isProductSelected: Bool = false
-    @Binding var searchText: String
-    @Binding var selectedProductNumber: Int
+    
     @State var setList: [BrickSetApiModel.Set] = []
     var networkManager = NetworkManager.shared
     @Environment (\.modelContext) private var modelContext
+    
+    @State var searchText: String = ""
+    @State var selectedProductNumber: Int = 0
     
     var body: some View {
         NavigationStack {
@@ -51,7 +55,7 @@ struct NewLEGO: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button(action: {
-                        isPresented = false
+                        presentationMode.wrappedValue.dismiss()
                     }, label: {
                         Text("Cancel")
                     })
@@ -75,7 +79,9 @@ struct NewLEGO: View {
                             
                             createBrickSet(bricksSet)
                         }
-                        isPresented = false
+                        
+                        presentationMode.wrappedValue.dismiss()
+                        
                     }, label: {
                         Text("Add")
                     })
@@ -119,6 +125,6 @@ struct NewLEGO: View {
     
     container.mainContext.insert(BrickSet(setID: "avt008", theme: "ff", subtheme: "", setName: "frrf", pieces: 0, isAssembled: true, price: 0.0, minifigureIdList: [], setImageURL: "", isFavorite: true, isOwned: true, photos: [], purchaseDate: Date(), releasedDate: 0))
     
-    return NewLEGO(isPresented: .constant(false), searchText: .constant("6000"), selectedProductNumber: .constant(6000))
+    return NewLEGO()
         .modelContainer(container)
 }
