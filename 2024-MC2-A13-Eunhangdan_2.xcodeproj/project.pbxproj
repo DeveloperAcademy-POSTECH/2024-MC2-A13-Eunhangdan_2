@@ -45,6 +45,8 @@
 		5B19C7202BFE536900AC0404 /* EmptySearchResultScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B19C71F2BFE536900AC0404 /* EmptySearchResultScreen.swift */; };
 		7D4FD32D2BFCD5880032A839 /* BoxesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4FD32C2BFCD5880032A839 /* BoxesView.swift */; };
 		7D4FD32F2BFCD5A00032A839 /* BoxesGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4FD32E2BFCD5A00032A839 /* BoxesGrid.swift */; };
+		F018E99C2BFF619B00A78B08 /* MyPageIfYouNeedHelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F018E99B2BFF619B00A78B08 /* MyPageIfYouNeedHelpView.swift */; };
+		F018E99E2BFF61FA00A78B08 /* MyPageWhoMadeThis.swift in Sources */ = {isa = PBXBuildFile; fileRef = F018E99D2BFF61FA00A78B08 /* MyPageWhoMadeThis.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +89,8 @@
 		5B19C71F2BFE536900AC0404 /* EmptySearchResultScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySearchResultScreen.swift; sourceTree = "<group>"; };
 		7D4FD32C2BFCD5880032A839 /* BoxesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxesView.swift; sourceTree = "<group>"; };
 		7D4FD32E2BFCD5A00032A839 /* BoxesGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxesGrid.swift; sourceTree = "<group>"; };
+		F018E99B2BFF619B00A78B08 /* MyPageIfYouNeedHelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageIfYouNeedHelpView.swift; sourceTree = "<group>"; };
+		F018E99D2BFF61FA00A78B08 /* MyPageWhoMadeThis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageWhoMadeThis.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,8 @@
 			isa = PBXGroup;
 			children = (
 				40C31E872BFF1C3D001BDB84 /* MyPageView.swift */,
+				F018E99D2BFF61FA00A78B08 /* MyPageWhoMadeThis.swift */,
+				F018E99B2BFF619B00A78B08 /* MyPageIfYouNeedHelpView.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -364,12 +370,14 @@
 				5B19C71A2BFE533F00AC0404 /* NewLEGO.swift in Sources */,
 				40C31E5C2BFCC292001BDB84 /* BoxDetailView.swift in Sources */,
 				5B19C71C2BFE534A00AC0404 /* AddButton.swift in Sources */,
+				F018E99C2BFF619B00A78B08 /* MyPageIfYouNeedHelpView.swift in Sources */,
 				40C31E3B2BFCC235001BDB84 /* SearchView.swift in Sources */,
 				40C31E3E2BFCC235001BDB84 /* SearchedLEGODetailView.swift in Sources */,
 				40C31E472BFCC242001BDB84 /* NetworkTestView.swift in Sources */,
 				40C31E272BFCC1F7001BDB84 /* EunhangdanVol2.swift in Sources */,
 				40C31E3D2BFCC235001BDB84 /* SearchResultView.swift in Sources */,
 				40C31E822BFEEF76001BDB84 /* RegisterMinifigureView.swift in Sources */,
+				F018E99E2BFF61FA00A78B08 /* MyPageWhoMadeThis.swift in Sources */,
 				5B19C71E2BFE535600AC0404 /* SearchLEGOBoxForAdding.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

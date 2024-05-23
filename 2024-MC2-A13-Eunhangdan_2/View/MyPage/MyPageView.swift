@@ -6,62 +6,72 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct MyPageView: View {
+    
+    // @Environment (\.modelContext) private var modelContext
+    @Query(sort: \Minifig.minifigID) var minifigs: [Minifig]
+    @Query(sort: \BrickSet.setID) var LEGOsets: [BrickSet]
     var body: some View {
         VStack{
             NavigationStack {
                 List{
                     Section {
                         HStack{
-                            Text("Hello, 최승원 님")
-                                .font(.largeTitle)
-                                .bold()
-                            
                             Spacer()
-                            
-                            Image(systemName: "person.circle.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100)
-                                .foregroundStyle(.red)
+                            VStack(alignment: .center){
+                                Spacer().frame(height: 20)
+                                Image(systemName: "person.circle.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 85)
+                                    .foregroundStyle(.red)
+                                
+                                Spacer().frame(height: 13)
+                                
+                                Text("Hello, 최승원 님")
+                                    .font(.title2)
+                                    .bold()
+                            }
+                            Spacer()
                         }
                         .listRowBackground(Color.clear)
                     }
                     
                     // 1번 섹션
-                    Section(header: Text("내 레고 보유 현황")
+                    Section(header: Text("나의 수집 기록")
                         .foregroundStyle(.black)
                         .bold()
                         .font(.title2)) {
-                        NavigationLink {
-                            
-                        } label: {
-                            Text("보유 레고 개수")
-                        }
-                        NavigationLink {
-                            
-                        } label: {
-                            Text("보유 피규어 개수")
-                        }
+                            HStack{
+                               Image("userLEGOnumber")
+                                    .resizable()
+                                    .frame(width: 31, height: 37)
+                                VStack(alignment: .leading){
+                                    Text("보유 레고 개수")
+                                        .bold()
+                                    Text("\(LEGOsets.count)개")
+                                        .font(.subheadline)
+                                        .opacity(0.6)
+                                }
+                            }
                     }
-                   
-                    // 2번 섹션
-                    Section(header: Text("내 레고의 가치")
-                        .foregroundStyle(.black)
-                        .bold()
-                        .font(.title2)) {
-                        NavigationLink {
-                            
-                        } label: {
-                            Text("내 레고 중고가 알아보기")
-                        }
-                        
-                        NavigationLink {
-                            
-                        } label: {
-                            Text("내 피규어 중고가 알아보기")
-                        }
+                    .listSectionSpacing(15)
+                    
+                    Section() {
+                            HStack{
+                               Image("batteryblockMypage")
+                                    .resizable()
+                                    .frame(width: 35, height: 25)
+                                VStack(alignment: .leading){
+                                    Text("보유 피규어 개수")
+                                        .bold()
+                                    Text("\(minifigs.count)개")
+                                        .font(.subheadline)
+                                        .opacity(0.6)
+                                }
+                            }
                     }
                     
                     // 3번 섹션
@@ -70,7 +80,7 @@ struct MyPageView: View {
                         .bold()
                         .font(.title2)) {
                         NavigationLink {
-                            
+                            MyPageIfYouNeedHelpView()
                         } label: {
                             Text("도움이 필요하다면?")
                         }
@@ -88,18 +98,9 @@ struct MyPageView: View {
                         }
 
                     }
-                    
-                    Section {
-                        Button(action: {
-                            
-                        }, label: {
-                            Text("내 레고 데이터 내보내기/받기")
-                        })
-                        
-                    }
+                
                 }
                 .navigationTitle("My Page")
-
             }
             
         }
