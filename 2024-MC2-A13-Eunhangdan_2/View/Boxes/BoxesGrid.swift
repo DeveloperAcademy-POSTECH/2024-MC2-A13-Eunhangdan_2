@@ -12,7 +12,6 @@ import SwiftData
 
 struct BoxesGrid: View {
 
-    // View 안에서의 상태 체크 인자 (Bool)
     let layoutImgStrings: [[String]]    // 2차원 배열 'layoutImgStrings' 선언
     var spacing: CGFloat
     
@@ -23,7 +22,7 @@ struct BoxesGrid: View {
         // layoutImgStrings에 imgStrings 요소 집어넣기
         for imgString in imgStrings {
             tmp.append(imgString)    // img 변수를 tmp 배열에 추가하기
-            if tmp.count >= 7 {    // tmp 배열의 요소가 2개 이상이 되면 블록 실행
+            if tmp.count >= 7 {    // tmp 배열의 요소가 7개 이상이 되면 블록 실행
                 layoutImgStrings.append(tmp)    // tmp 배열을 layoutImgStrings에 추가
                 tmp.removeAll()    // tmp 배열 초기화
             }
@@ -36,7 +35,8 @@ struct BoxesGrid: View {
         
         self.layoutImgStrings = layoutImgStrings
         self.spacing = spacing
-    }
+        
+    }  // init
     
     var body: some View {
         GeometryReader { reader in
@@ -68,15 +68,16 @@ struct BoxesGrid: View {
                                 Layout3(imgStrings: Array(imgStrings[4...6]), viewWidth: viewWidth, spacing: spacing)
                             }
                         }
-                    }
+                    }  // ForEach
                     
-                }            }
-        }
+                }  // VStack
+            }  // ScrollView
+        }  // GeometryReader
         
     }
     
     
-}
+}  // BoxesGrid
 
 
 // Main Grid Layout
@@ -98,7 +99,7 @@ struct Layout1: View {
     }
 }
 
-// Layout 2 -> 경우를 나눠서 두가지 모양이 번갈아 나오게 하기
+// Layout 2
 struct Layout2: View {
     let imgStrings: [String]
     let viewWidth: CGFloat
@@ -119,7 +120,7 @@ struct Layout2: View {
     }
 }
 
-// Layout 2 -> 경우를 나눠서 두가지 모양이 번갈아 나오게 하기
+// Layout 3
 struct Layout3: View {
     
     let imgStrings: [String]
