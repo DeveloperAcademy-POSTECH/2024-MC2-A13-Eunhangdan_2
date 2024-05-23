@@ -24,7 +24,7 @@ struct BoxesView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                BoxesGrid(imgStrings: imgStrings, spacing: 5)
+                BoxesGrid(imgStrings: imgStrings, spacing: 3)
             }
             .navigationTitle("Boxes")
             .navigationBarTitleDisplayMode(.automatic)
