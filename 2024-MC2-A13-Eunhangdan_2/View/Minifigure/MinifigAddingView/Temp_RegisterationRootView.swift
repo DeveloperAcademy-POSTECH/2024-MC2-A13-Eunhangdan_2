@@ -20,7 +20,6 @@ struct Temp_RegisterationRootView: View {
         }.sheet(isPresented : $isPresented) {
             NavigationStack {
                 RegisterMinifigureView()
-                    .navigationTitle("New Minifigure")
             }
         }
         

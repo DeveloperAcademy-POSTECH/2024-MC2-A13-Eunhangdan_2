@@ -11,7 +11,7 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            BoxesView()
+            BoxesContainerView()
                 .tabItem {
                     Image(systemName: "archivebox")
                     Text("Boxes")

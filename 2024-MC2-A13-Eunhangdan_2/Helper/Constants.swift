@@ -17,3 +17,7 @@ public struct BrickApi {
     
     private init(){}
 }
+
+enum FilterType {
+    case favorite, assembled, none
+}

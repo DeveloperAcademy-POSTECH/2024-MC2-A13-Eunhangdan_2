@@ -9,13 +9,112 @@
 import SwiftUI
 import SwiftData
 
+struct BoxesContainerView : View {
+    
+    @State private var sortOrder = SortDescriptor(\BrickSet.setID)
+    @State var filterOption: FilterType = .none
+    
+    @State var boxAddViewPresented = false
+    @State var minifigAddViewPresented = false
+    
+    @State var firstSortOption = "checkmark"
+    @State var secondSortOption = ""
+    @State var thirdSortOption = ""
+    
+    
+    var body: some View {
+        NavigationStack {
+            BoxesView(sort: sortOrder, filter: filterOption)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        
+                        Menu {
+                            Button {
+                                self.sortOrder = SortDescriptor(\BrickSet.setID)
+                                self.filterOption = .none
+                                self.firstSortOption = "checkmark"
+                                self.secondSortOption = ""
+                                self.thirdSortOption = ""
+                            } label: {
+                                Label("All LEGO", systemImage: "\(firstSortOption)")
+                            }
+                            
+                            Button {
+                                self.filterOption = .assembled
+                                self.firstSortOption = ""
+                                self.secondSortOption = "checkmark"
+                                self.thirdSortOption = ""
+                            } label: {
+                                Label("Assembled", systemImage: "\(secondSortOption)")
+                            }
+                            
+                            Button(action: {
+                                self.filterOption = .favorite
+                                self.firstSortOption = ""
+                                self.secondSortOption = ""
+                                self.thirdSortOption = "checkmark"
+                            }) {
+                                Label("My Favorite", systemImage: "\(thirdSortOption)")
+                            }
+                        } label: {
+                            Image(systemName: "line.3.horizontal.decrease.circle")
+                        }
+                        
+                    }  // 필터 메뉴
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Menu {
+                            Button(action: {
+                                boxAddViewPresented = true
+                            }) {
+                                Text("Add LEGO")
+                                Image("shippingboxplus")
+                            }
+                            Button(action: {
+                                minifigAddViewPresented = true
+                            }) {
+                                Text("Add Minifigures")
+                                Image("batteryblockplus")
+                            }
+                        } label: {
+                            Image(systemName: "plus")
+                        }
+                    }  // 레고등록/미니피규어 등록 -> Collection 추가화면으로 이
+                }
+        }
+        
+        .sheet(isPresented: $boxAddViewPresented) {
+            NewLEGO()
+        }.sheet(isPresented: $minifigAddViewPresented) {
+            NavigationStack {
+                RegisterMinifigureView()
+            }
+        }
+    }
+}
+
+
 struct BoxesView: View {
     
     @Environment (\.modelContext) private var modelContext
     // @Query 어노테이션을 이용해서 container에 데이터를 불러올 수 있음 (get only)
-    @Query(sort: \BrickSet.setID) var brickSets: [BrickSet]
-
-    @State var isPresented = false
+    @Query var brickSets: [BrickSet]
+    
+    init(sort: SortDescriptor<BrickSet>, filter: FilterType) {
+        if filter == .favorite {
+            
+            _brickSets = Query(filter: #Predicate {
+                $0.isFavorite == true
+            }, sort: [sort])
+        }
+        else if filter == .assembled {
+            _brickSets = Query(filter: #Predicate {
+                $0.isAssembled == true
+            }, sort: [sort])
+        }
+        else {
+            _brickSets = Query(sort: [sort])
+        }
+    }
     
     var imgStrings: [String] {
         brickSets.map { $0.setID }
@@ -28,47 +127,7 @@ struct BoxesView: View {
             }
             .navigationTitle("Boxes")
             .navigationBarTitleDisplayMode(.automatic)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Menu {
-                        Button(action: {
-                        }) {
-                            Label("All LEGO", systemImage: "checkmark")
-                        }
-                        Button(action: {
-                        }) {
-                            
-                            Label("Assembled", systemImage: "")
-                 
-                        }
-                        Button(action: {
-                        }) {
-                            Label("My Favorite", systemImage: "")
-                        }
-                    } label: {
-                        Image(systemName: "line.3.horizontal.decrease.circle")
-                    }
-                }  // 필터 메뉴
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Menu {
-                        Button(action: {
-                                                  isPresented = true
-                        }) {
-                            Text("Add LEGO")
-                            Image("shippingboxplus")
-                        }
-                        Button(action: {
-                        }) {
-                            Text("Add Minifigures")
-                            Image("batteryblockplus")
-                        }
-                    } label: {
-                        Image(systemName: "plus")
-                    }
-                }  // 레고등록/미니피규어 등록 -> Collection 추가화면으로 이
-            }
-        }.sheet(isPresented: $isPresented) {
-            NewLEGO()
+            
         }
     }
 } // BoxesView
@@ -105,6 +164,6 @@ struct BoxesView: View {
     
     
     
-    return BoxesView().modelContainer(container)
+    return BoxesView(sort: SortDescriptor(\BrickSet.setID), filter: .none).modelContainer(container)
 }
 

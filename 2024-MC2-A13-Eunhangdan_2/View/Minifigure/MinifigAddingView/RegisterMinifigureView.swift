@@ -46,6 +46,8 @@ struct RegisterMinifigureView: View {
                 }
             }
         }
+        .navigationTitle("New Minifigure")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
