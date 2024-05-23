@@ -45,7 +45,13 @@ func loadBrickSetCSVData() -> [BrickSet] {
     for row in rows {
         let csvColumns = row.components(separatedBy: ",")
         if csvColumns.count == rows.first?.components(separatedBy: ",").count {
-            let lineClass = BrickSet(raw: csvColumns)
+            
+            let trimmedColumns = csvColumns.map {
+                $0.replacingOccurrences(of: "\"" , with: "", options: .regularExpression)
+            }
+            
+            let lineClass = BrickSet(raw: trimmedColumns)
+            
             csvToClass.append(lineClass)
         }
         
@@ -85,7 +91,12 @@ func loadMinifigCSVData() -> [Minifig] {
     for row in rows {
         let csvColumns = row.components(separatedBy: ",")
         if csvColumns.count == rows.first?.components(separatedBy: ",").count {
-            let lineClass = Minifig(raw: csvColumns)
+            
+            let trimmedColumns = csvColumns.map {
+                $0.replacingOccurrences(of: "\"" , with: "", options: .regularExpression)
+            }
+            
+            let lineClass = Minifig(raw: trimmedColumns)
             csvToClass.append(lineClass)
         }
         
