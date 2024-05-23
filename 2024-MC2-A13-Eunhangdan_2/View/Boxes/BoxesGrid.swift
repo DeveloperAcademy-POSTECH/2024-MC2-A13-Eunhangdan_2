@@ -15,7 +15,7 @@ struct BoxesGrid: View {
     let layoutImgStrings: [[String]]    // 2차원 배열 'layoutImgStrings' 선언
     var spacing: CGFloat
     
-    init(imgStrings: [String], spacing: CGFloat = 2) {    // CGFloat: 32비트에서는 Float, 64비트에서는 Double로 처리함
+    init(imgStrings: [String], spacing: CGFloat = 3) {    // CGFloat: 32비트에서는 Float, 64비트에서는 Double로 처리함
         var layoutImgStrings = [[String]]()
         var tmp = [String]() // 빈 문자열 배열 'tmp' 선언
         
@@ -73,6 +73,7 @@ struct BoxesGrid: View {
                 }  // VStack
             }  // ScrollView
         }  // GeometryReader
+        .background(Material.thick)
         
     }
     
@@ -88,7 +89,7 @@ struct Layout1: View {
     let spacing: CGFloat
     
     var body: some View {
-        let height: CGFloat = (viewWidth - (2 * spacing)) / 2
+        let height: CGFloat = (viewWidth - (2 * spacing)) / 2.05
         
         return HStack(spacing: spacing) {
             ForEach(imgStrings, id: \.self) {  imgString in
@@ -106,7 +107,7 @@ struct Layout2: View {
     let spacing: CGFloat
     
     var body: some View {
-        let smallItemWidth: CGFloat = (viewWidth - (2 * spacing)) / 3
+        let smallItemWidth: CGFloat = (viewWidth - (2 * spacing)) / 3.1
         let height: CGFloat = smallItemWidth * 2 + spacing
         
         return HStack(spacing: spacing) {
@@ -128,7 +129,7 @@ struct Layout3: View {
     let spacing: CGFloat
     
     var body: some View {
-        let smallItemWidth: CGFloat = (viewWidth - (2 * spacing)) / 3
+        let smallItemWidth: CGFloat = (viewWidth - (2 * spacing)) / 3.1
         let height: CGFloat = smallItemWidth * 2 + spacing
         
         return HStack(spacing: spacing) {
@@ -158,10 +159,10 @@ struct NavigationImage: View {
 }
 
 #Preview {
-    let str = ["avt008", "avt009", "avt010", "avt011", "avt011", "bio001", "bio002",
-               "bio003", "bio004", "bio005", "bio006", "avt008", "avt009", "avt010",
-               "avt011", "avt011", "bio001", "bio002", "bio003", "bio004", "bio005",
-               "bio006", "bio007", "bio008"]
+    let str = ["1374-1", "1376-1", "1737-1", "3423-1", "3425-2", "3431-1",
+               "4475-1", "4478-1", "4484-1", "4488-1", "4489-1", "4490-1",
+               "4500-1", "4566-1", "4567-1", "4568-1", "4569-1", "4570-1",
+               "4571-1", "4572-1", "4573-1", "4593-1", "4607-1"]
     return BoxesGrid(imgStrings: str)
 }
 
