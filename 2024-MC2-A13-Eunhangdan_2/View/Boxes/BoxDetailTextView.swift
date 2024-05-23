@@ -42,15 +42,20 @@ struct BoxDetailTextView: View {
                 Spacer()
                     .frame(height: 10)
                 HStack{
-                    Text("Sale Date:")
+                    Text("Released Year:")
                         .foregroundColor(.gray)
-                    Text("2002.4.23 - 2003.12.31")
-                        .font(.subheadline)
+                    
+                    if brickSet.releasedDate == 0 {
+                        Text("????")
+                    } else {
+                        Text("\(brickSet.releasedDate)".replacingOccurrences(of: ",", with: ""))
+                            .font(.subheadline)
+                    }
                 }
                 HStack{
                     Text("Sale Price:")
                         .foregroundColor(.gray)
-                    Text("$\(brickSet.price)")
+                    Text("$\(String(format: "%.2f", brickSet.price))")
                         .font(.subheadline)
                 }
                 HStack{
