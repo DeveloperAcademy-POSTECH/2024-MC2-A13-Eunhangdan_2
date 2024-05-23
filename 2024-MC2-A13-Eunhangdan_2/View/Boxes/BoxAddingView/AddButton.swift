@@ -13,7 +13,7 @@ struct AddButton: View {
             Text("+")
         })
         .sheet(isPresented: $isPresented, content: {
-            NewLEGO(searchText: $searchText, selectedProductNumber: $selectedProductNumber)
+            NewLEGO(isPresented: $isPresented, searchText: $searchText, selectedProductNumber: $selectedProductNumber)
         })
         
     }
