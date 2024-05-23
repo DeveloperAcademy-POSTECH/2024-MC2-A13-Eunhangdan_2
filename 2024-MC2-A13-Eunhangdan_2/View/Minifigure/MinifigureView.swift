@@ -255,10 +255,10 @@ struct MinifigureModalView: View{
 // MARK: - Minifigure List View 구현부
 struct MinifigureListView: View {
     @State var scrolledID: UUID?
-    @Binding var showMinifigureModal: Bool
-    @Binding var minifigures: [minifigureItem]
     @State var subthemeFilteredMinifigs: [[minifigureItem]] = []
     @State var subThemeArray: [String] = []
+    @Binding var showMinifigureModal: Bool
+    @Binding var minifigures: [minifigureItem]
     var body: some View {
         ScrollView(){
             ForEach(subThemeArray.indices, id: \.self){ index in

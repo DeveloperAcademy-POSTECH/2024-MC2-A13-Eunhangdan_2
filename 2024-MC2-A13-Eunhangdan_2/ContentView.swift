@@ -46,6 +46,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    //ContentView()
-    MinifigureTabView()
+    ContentView()
 }
