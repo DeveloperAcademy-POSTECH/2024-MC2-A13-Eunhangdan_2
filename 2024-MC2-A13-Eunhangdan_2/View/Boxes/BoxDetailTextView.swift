@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct BoxDetailTextView: View {
-    
+    @Environment (\.modelContext) private var modelContext
     let brickSet: BrickSet
     
     var body: some View {
@@ -86,11 +87,24 @@ struct BoxDetailTextView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        //
+                        brickSet.isFavorite.toggle()
                     }) {
-                        Image(systemName: "heart")
-                            .foregroundColor(.red)
+                        if brickSet.isFavorite {
+                            Image(systemName: "heart.fill")
+                                .foregroundColor(.red)
+                        } else {
+                            Image(systemName: "heart")
+                                .foregroundColor(.red)
+                        }
                     }
+                }
+            }
+            .onDisappear {
+                do {
+                    modelContext.insert(brickSet)
+                    try modelContext.save()
+                } catch {
+                    print("Error: failed to save 'isFavorite' toggle")
                 }
             }
     }
@@ -98,9 +112,36 @@ struct BoxDetailTextView: View {
 
 #Preview {
     NavigationStack() {
-        BoxDetailTextView(brickSet:
-                            BrickSet(setID: "bio001", theme: "무적 시리즈", subtheme: "", setName: "해골 레고", pieces: 0, isAssembled: true, price: 0.0, setImageURL: "", isFavorite: true, isOwned: true, photos: [], purchaseDate: Date(), releasedDate: 0)
-        )
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container : ModelContainer = {
+            let schema = Schema([
+                BrickSet.self, Minifig.self, BrickVillege.self,
+            ])
+
+            do {
+                return try ModelContainer(for: schema, configurations: config)
+            } catch {
+                fatalError("Could not create ModelContainer: \(error)")
+            }
+        }()
+        
+        
+        container.mainContext.insert(BrickSet(setID: "avt010", theme: "", subtheme: "", setName: "", pieces: 0, isAssembled: true, price: 0.0, minifigureIdList: [], setImageURL: "", isFavorite: true, isOwned: true, photos: [], purchaseDate: Date(), releasedDate: 0))
+        
+        container.mainContext.insert(BrickSet(setID: "avt007", theme: "", subtheme: "", setName: "", pieces: 0, isAssembled: true, price: 0.0, minifigureIdList: [], setImageURL: "", isFavorite: true, isOwned: true, photos: [], purchaseDate: Date(), releasedDate: 0))
+        
+        container.mainContext.insert(BrickSet(setID: "avt008", theme: "", subtheme: "", setName: "", pieces: 0, isAssembled: true, price: 0.0, minifigureIdList: [], setImageURL: "", isFavorite: true, isOwned: true, photos: [], purchaseDate: Date(), releasedDate: 0))
+        
+        container.mainContext.insert(BrickSet(setID: "avt011", theme: "", subtheme: "", setName: "", pieces: 0, isAssembled: true, price: 0.0, minifigureIdList: [], setImageURL: "", isFavorite: true, isOwned: true, photos: [], purchaseDate: Date(), releasedDate: 0))
+        
+        container.mainContext.insert(BrickSet(setID: "bio001", theme: "", subtheme: "", setName: "", pieces: 0, isAssembled: true, price: 0.0, minifigureIdList: [], setImageURL: "", isFavorite: true, isOwned: true, photos: [], purchaseDate: Date(), releasedDate: 0))
+        
+        container.mainContext.insert(BrickSet(setID: "bio002", theme: "", subtheme: "", setName: "", pieces: 0, isAssembled: true, price: 0.0, minifigureIdList: [], setImageURL: "", isFavorite: true, isOwned: true, photos: [], purchaseDate: Date(), releasedDate: 0))
+        
+        container.mainContext.insert(BrickSet(setID: "bio005", theme: "", subtheme: "", setName: "", pieces: 0, isAssembled: true, price: 0.0, minifigureIdList: [], setImageURL: "", isFavorite: true, isOwned: true, photos: [], purchaseDate: Date(), releasedDate: 0))
+        
+        return BoxDetailTextView(brickSet: BrickSet(setID: "bio005", theme: "", subtheme: "", setName: "", pieces: 0, isAssembled: true, price: 0.0, minifigureIdList: [], setImageURL: "", isFavorite: true, isOwned: true, photos: [], purchaseDate: Date(), releasedDate: 0))
+            .modelContainer(container)
 
     }
     
