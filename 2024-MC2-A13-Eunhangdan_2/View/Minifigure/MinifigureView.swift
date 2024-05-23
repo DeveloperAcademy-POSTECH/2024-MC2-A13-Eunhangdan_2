@@ -184,8 +184,6 @@ struct VillageView: View{
 
 //MARK: - Minifigure Modal View 구현부
 struct MinifigureModalView: View{
-    let minifigID: String
-
     var body: some View {
         VStack{
             Spacer(minLength: 16.5)

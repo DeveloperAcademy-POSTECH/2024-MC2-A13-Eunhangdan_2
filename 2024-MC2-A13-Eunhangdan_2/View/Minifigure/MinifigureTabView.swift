@@ -48,7 +48,7 @@ struct MinifigureTabView: View {
                     
                     ForEach(Array(themeArray.enumerated()) , id: \.offset){ index, theme in
                         ZStack{
-                            if (theme.hashValue % 2 == 0){
+                            if (index % 2 == 0){
                                 Rectangle()
                                     .foregroundColor(.white)
                                     .frame(width: 393, height: 207)
@@ -72,7 +72,7 @@ struct MinifigureTabView: View {
                                         
                                     })
                                     .sheet(isPresented: self.$showMinifigureModal, content: {
-                                        MinifigureModalView(minifigID: "")
+                                        MinifigureModalView()
                                             .presentationDetents([.medium])
                                             .presentationDragIndicator(.visible)
                                     })
