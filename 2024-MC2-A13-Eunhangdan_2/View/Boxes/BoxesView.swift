@@ -15,6 +15,8 @@ struct BoxesView: View {
     // @Query 어노테이션을 이용해서 container에 데이터를 불러올 수 있음 (get only)
     @Query(sort: \BrickSet.setID) var brickSets: [BrickSet]
 
+    @State var isPresented = false
+    
     var imgStrings: [String] {
         brickSets.map { $0.setID }
     }
@@ -36,13 +38,17 @@ struct BoxesView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     // 레고등록/미니피규어 등록 -> Collection 추가화면으로 이동
-                    Button(action: {}, label: {
+                    Button(action: {
+                        isPresented = true
+                    }, label: {
                         Image(systemName: "plus")
                             .foregroundStyle(.red)
                     })
                 }
                 
             }
+        }.sheet(isPresented: $isPresented) {
+            NewLEGO()
         }
     }
 }
