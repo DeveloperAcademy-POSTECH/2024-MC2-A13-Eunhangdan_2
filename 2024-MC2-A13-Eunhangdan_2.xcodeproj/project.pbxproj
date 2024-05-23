@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		33AD6C252BFE8B9F0083E8AC /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AD6C242BFE8B9F0083E8AC /* MyPageView.swift */; };
 		40C31E272BFCC1F7001BDB84 /* EunhangdanVol2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C31E262BFCC1F7001BDB84 /* EunhangdanVol2.swift */; };
 		40C31E292BFCC1F7001BDB84 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C31E282BFCC1F7001BDB84 /* ContentView.swift */; };
 		40C31E2B2BFCC1F7001BDB84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40C31E2A2BFCC1F7001BDB84 /* Assets.xcassets */; };
@@ -39,6 +38,7 @@
 		40C31E822BFEEF76001BDB84 /* RegisterMinifigureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C31E812BFEEF76001BDB84 /* RegisterMinifigureView.swift */; };
 		40C31E842BFEEF92001BDB84 /* Register_NoResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C31E832BFEEF92001BDB84 /* Register_NoResultView.swift */; };
 		40C31E862BFEEFA2001BDB84 /* Temp_RegisterationRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C31E852BFEEFA2001BDB84 /* Temp_RegisterationRootView.swift */; };
+		40C31E882BFF1C3D001BDB84 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C31E872BFF1C3D001BDB84 /* MyPageView.swift */; };
 		5B19C71A2BFE533F00AC0404 /* NewLEGO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B19C7192BFE533F00AC0404 /* NewLEGO.swift */; };
 		5B19C71C2BFE534A00AC0404 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B19C71B2BFE534A00AC0404 /* AddButton.swift */; };
 		5B19C71E2BFE535600AC0404 /* SearchLEGOBoxForAdding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B19C71D2BFE535600AC0404 /* SearchLEGOBoxForAdding.swift */; };
@@ -48,7 +48,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		33AD6C242BFE8B9F0083E8AC /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		40C31E232BFCC1F7001BDB84 /* 2024-MC2-A13-Eunhangdan_2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "2024-MC2-A13-Eunhangdan_2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		40C31E262BFCC1F7001BDB84 /* EunhangdanVol2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EunhangdanVol2.swift; sourceTree = "<group>"; };
 		40C31E282BFCC1F7001BDB84 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -81,6 +80,7 @@
 		40C31E812BFEEF76001BDB84 /* RegisterMinifigureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterMinifigureView.swift; sourceTree = "<group>"; };
 		40C31E832BFEEF92001BDB84 /* Register_NoResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register_NoResultView.swift; sourceTree = "<group>"; };
 		40C31E852BFEEFA2001BDB84 /* Temp_RegisterationRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temp_RegisterationRootView.swift; sourceTree = "<group>"; };
+		40C31E872BFF1C3D001BDB84 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		5B19C7192BFE533F00AC0404 /* NewLEGO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLEGO.swift; sourceTree = "<group>"; };
 		5B19C71B2BFE534A00AC0404 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		5B19C71D2BFE535600AC0404 /* SearchLEGOBoxForAdding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLEGOBoxForAdding.swift; sourceTree = "<group>"; };
@@ -103,7 +103,7 @@
 		333769F12BFE359F008D840E /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
-				33AD6C242BFE8B9F0083E8AC /* MyPageView.swift */,
+				40C31E872BFF1C3D001BDB84 /* MyPageView.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -346,6 +346,7 @@
 				40C31E482BFCC242001BDB84 /* TotalTestView.swift in Sources */,
 				40C31E3C2BFCC235001BDB84 /* SearchedMinifigureDetailView.swift in Sources */,
 				40C31E532BFCC25F001BDB84 /* NetworkManager.swift in Sources */,
+				40C31E882BFF1C3D001BDB84 /* MyPageView.swift in Sources */,
 				7D4FD32F2BFCD5A00032A839 /* BoxesGrid.swift in Sources */,
 				40C31E502BFCC255001BDB84 /* ApiModel.swift in Sources */,
 				40C31E5E2BFCC292001BDB84 /* BoxDetailMyMemoryView.swift in Sources */,
@@ -354,7 +355,6 @@
 				40C31E4E2BFCC255001BDB84 /* DataModel.swift in Sources */,
 				5B19C7202BFE536900AC0404 /* EmptySearchResultScreen.swift in Sources */,
 				40C31E662BFCC2D0001BDB84 /* MinifigureTabView.swift in Sources */,
-				33AD6C252BFE8B9F0083E8AC /* MyPageView.swift in Sources */,
 				7D4FD32D2BFCD5880032A839 /* BoxesView.swift in Sources */,
 				40C31E802BFEEF4C001BDB84 /* RegisterMinifigSearchView.swift in Sources */,
 				40C31E842BFEEF92001BDB84 /* Register_NoResultView.swift in Sources */,
