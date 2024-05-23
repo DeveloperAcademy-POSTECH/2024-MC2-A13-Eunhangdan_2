@@ -43,6 +43,7 @@
 		5B19C71C2BFE534A00AC0404 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B19C71B2BFE534A00AC0404 /* AddButton.swift */; };
 		5B19C71E2BFE535600AC0404 /* SearchLEGOBoxForAdding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B19C71D2BFE535600AC0404 /* SearchLEGOBoxForAdding.swift */; };
 		5B19C7202BFE536900AC0404 /* EmptySearchResultScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B19C71F2BFE536900AC0404 /* EmptySearchResultScreen.swift */; };
+		5B70674D2BFF53C100DA099C /* SearchedResultContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B70674C2BFF53C100DA099C /* SearchedResultContents.swift */; };
 		7D4FD32D2BFCD5880032A839 /* BoxesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4FD32C2BFCD5880032A839 /* BoxesView.swift */; };
 		7D4FD32F2BFCD5A00032A839 /* BoxesGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4FD32E2BFCD5A00032A839 /* BoxesGrid.swift */; };
 /* End PBXBuildFile section */
@@ -85,6 +86,7 @@
 		5B19C71B2BFE534A00AC0404 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		5B19C71D2BFE535600AC0404 /* SearchLEGOBoxForAdding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLEGOBoxForAdding.swift; sourceTree = "<group>"; };
 		5B19C71F2BFE536900AC0404 /* EmptySearchResultScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySearchResultScreen.swift; sourceTree = "<group>"; };
+		5B70674C2BFF53C100DA099C /* SearchedResultContents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedResultContents.swift; sourceTree = "<group>"; };
 		7D4FD32C2BFCD5880032A839 /* BoxesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxesView.swift; sourceTree = "<group>"; };
 		7D4FD32E2BFCD5A00032A839 /* BoxesGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxesGrid.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -234,11 +236,12 @@
 			isa = PBXGroup;
 			children = (
 				40C31E352BFCC235001BDB84 /* SearchView.swift */,
-				40C31E362BFCC235001BDB84 /* SearchedMinifigureDetailView.swift */,
-				40C31E372BFCC235001BDB84 /* SearchResultView.swift */,
-				40C31E382BFCC235001BDB84 /* SearchedLEGODetailView.swift */,
-				40C31E392BFCC235001BDB84 /* SeriesDetailView.swift */,
 				40C31E3A2BFCC235001BDB84 /* SeriesView.swift */,
+				40C31E392BFCC235001BDB84 /* SeriesDetailView.swift */,
+				40C31E372BFCC235001BDB84 /* SearchResultView.swift */,
+				5B70674C2BFF53C100DA099C /* SearchedResultContents.swift */,
+				40C31E362BFCC235001BDB84 /* SearchedMinifigureDetailView.swift */,
+				40C31E382BFCC235001BDB84 /* SearchedLEGODetailView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				40C31E3F2BFCC235001BDB84 /* SeriesDetailView.swift in Sources */,
 				40C31E492BFCC242001BDB84 /* HandleCSVTestView.swift in Sources */,
 				40C31E4E2BFCC255001BDB84 /* DataModel.swift in Sources */,
+				5B70674D2BFF53C100DA099C /* SearchedResultContents.swift in Sources */,
 				5B19C7202BFE536900AC0404 /* EmptySearchResultScreen.swift in Sources */,
 				40C31E662BFCC2D0001BDB84 /* MinifigureTabView.swift in Sources */,
 				7D4FD32D2BFCD5880032A839 /* BoxesView.swift in Sources */,
