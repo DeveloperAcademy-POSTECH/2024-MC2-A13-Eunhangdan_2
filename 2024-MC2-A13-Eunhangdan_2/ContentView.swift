@@ -11,13 +11,38 @@ struct ContentView: View {
     
     // put tab bar here
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabView {
+            Text("BoxesView")
+                .tabItem {
+                    Image(systemName: "archivebox")
+                    Text("Boxes")
+                }
+            
+            Text("MinifiguresView")
+                .tabItem {
+                    Image(systemName: "batteryblock")
+                    Text("Minifigures")
+                }
+            Text("SearchView")
+                .tabItem {
+                    Image(systemName: "magnifyingglass")
+                    Text("Search")
+                }
+            Text("MyPage")
+                .tabItem {
+                    Image(systemName: "person.crop.circle")
+                    Text("My Page")
+                }
+            
+        } // TabView
+        .onAppear {    // 탭바 백그라운드 투명화 방지 코드
+            let tabBarAppearance = UITabBarAppearance()
+            tabBarAppearance.configureWithOpaqueBackground()
+            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+            let navigationBarAppearance = UINavigationBarAppearance()
+            navigationBarAppearance.configureWithOpaqueBackground()
+            UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
         }
-        .padding()
     }
 }
 
