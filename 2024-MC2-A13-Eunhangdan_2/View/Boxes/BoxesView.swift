@@ -25,27 +25,49 @@ struct BoxesView: View {
                 BoxesGrid(imgStrings: imgStrings, spacing: 5)
             }
             .navigationTitle("Boxes")
-            .navigationSplitViewStyle(.automatic)
+            .navigationBarTitleDisplayMode(.automatic)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    // 필터 버튼
-                    Button(action: {}, label: {
+                    Menu {
+                        Button(action: {
+                        }) {
+                            Label("All LEGO", systemImage: "checkmark")
+                        }
+                        Button(action: {
+                        }) {
+                            
+                            Label("Assembled", systemImage: "")
+                 
+                        }
+                        Button(action: {
+                        }) {
+                            Label("My Favorite", systemImage: "")
+                        }
+                    } label: {
                         Image(systemName: "line.3.horizontal.decrease.circle")
-                            .foregroundStyle(.red)
-                    })
-                }
+                    }
+                }  // 필터 메뉴
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    // 레고등록/미니피규어 등록 -> Collection 추가화면으로 이동
-                    Button(action: {}, label: {
+                    Menu {
+                        Button(action: {
+                        }) {
+                            Text("Add LEGO")
+                            Image("shippingboxplus")
+                        }
+                        Button(action: {
+                        }) {
+                            Text("Add Minifigures")
+                            Image("batteryblockplus")
+                        }
+                    } label: {
                         Image(systemName: "plus")
-                            .foregroundStyle(.red)
-                    })
-                }
+                    }
+                }  // 레고등록/미니피규어 등록 -> Collection 추가화면으로 이동
                 
-            }
-        }
+            }  // toolbar
+        }  // NavigationStack
     }
-}
+} // BoxesView
 
 
 #Preview {
