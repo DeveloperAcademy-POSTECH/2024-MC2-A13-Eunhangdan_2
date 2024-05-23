@@ -52,14 +52,8 @@ struct NewLEGO: View {
                 
             }
             .navigationTitle("New LEGO")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(action: {
-                        presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Text("Cancel")
-                    })
-                }
                 ToolbarItem(placement: .topBarTrailing){
                     Button(action: {
                         if String(selectedProductNumber) == "" {return}
