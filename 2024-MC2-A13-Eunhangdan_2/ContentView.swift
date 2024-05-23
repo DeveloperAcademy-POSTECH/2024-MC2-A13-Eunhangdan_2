@@ -9,26 +9,25 @@ import SwiftUI
 
 struct ContentView: View {
     
-    // put tab bar here
     var body: some View {
         TabView {
-            Text("BoxesView")
+            BoxesView()
                 .tabItem {
                     Image(systemName: "archivebox")
                     Text("Boxes")
                 }
             
-            Text("MinifiguresView")
+            MinifigureTabView()
                 .tabItem {
                     Image(systemName: "batteryblock")
                     Text("Minifigures")
                 }
-            Text("SearchView")
+            SearchView()
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                     Text("Search")
                 }
-            Text("MyPage")
+            MyPageView()
                 .tabItem {
                     Image(systemName: "person.crop.circle")
                     Text("My Page")

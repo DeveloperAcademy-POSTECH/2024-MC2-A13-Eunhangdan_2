@@ -70,7 +70,7 @@ struct EunhaengdanVol1App: App {
     
     var body: some Scene {
         WindowGroup {
-            TotalTestView()
+            ContentView()
         }
         .modelContainer(sharedModelContainer)
     }
