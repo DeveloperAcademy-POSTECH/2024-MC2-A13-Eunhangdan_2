@@ -53,6 +53,7 @@ enum ModelSchemaV1: VersionedSchema {
         // var minifigureCount: Int // 미니피규어 개수 (없다면 0으로)
         var minifigureIdList: [String] // 미니피규어 아이디 리스트
         var setImageURL: String // 세트 이미지
+        @Attribute(.externalStorage) var setImage: Data?
         var isFavorite: Bool // 즐겨찾기 여부
         var isOwned: Bool // 보유 여부
         // var isWanted: Bool // 찜 여부  삭제
@@ -60,7 +61,7 @@ enum ModelSchemaV1: VersionedSchema {
         var purchaseDate: Date // 구매일
         var releasedDate: Int // 출시연도
         var discontinuedDate : Date? // 단종일
-        
+   
         init(setID: String, theme: String, subtheme: String, setName: String, pieces: Int, isAssembled: Bool, price: Double, minifigureIdList: [String] = [], setImageURL: String, isFavorite: Bool, isOwned: Bool, photos: [Photo], purchaseDate: Date, releasedDate: Int, discontinuedDate: Date? = nil) {
             self.setID = setID
             self.theme = theme
@@ -77,6 +78,12 @@ enum ModelSchemaV1: VersionedSchema {
             self.purchaseDate = purchaseDate
             self.releasedDate = releasedDate
             self.discontinuedDate = discontinuedDate
+            
+            if !setImageURL.isEmpty {
+                let url = URL(string: setImageURL)!
+                self.downloadImage(from: url)
+            }
+            
         }
         
         init(raw: [String]){
@@ -109,6 +116,26 @@ enum ModelSchemaV1: VersionedSchema {
             
             self.init(setID: String(brickSet.setID), theme: brickSet.theme, subtheme: subtheme, setName: brickSet.name, pieces:pieces, isAssembled: false, price: price, minifigureIdList: [], setImageURL: brickSet.image.imageURL, isFavorite: false, isOwned: false, photos: [], purchaseDate: Date(), releasedDate: brickSet.year)
         }
+        
+        // url에서 데이터 받기
+        private func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+            URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+        }
+        
+        // 실제 호출되는 다운로드 이미지
+        func downloadImage(from url: URL) {
+            print("Download Started")
+            getData(from: url) { data, response, error in
+                guard let data = data, error == nil else { return }
+                print(response?.suggestedFilename ?? url.lastPathComponent)
+                print("Download Finished")
+                // 작업 완료 후 메인 쓰레드로
+                DispatchQueue.main.async() { [weak self] in
+                    self?.setImage = data
+                }
+            }
+        }
+        
     }
     
     //MARK: - Minifig 모델 정의
@@ -122,7 +149,9 @@ enum ModelSchemaV1: VersionedSchema {
         var price: Double // USD 가격
         var minifigCount: Int // 미니 피규어 개수
         var minifigImageURL: String // 피규어 이미지 url 주소
-        
+        var createdDate: Date // 생성 날짜
+        @Attribute(.externalStorage) var minifigImage: Data? // 미니 피규어 사진
+ 
         var splitCategory: [String] {
             if themeCategory == "" {return []}
             return themeCategory
@@ -138,6 +167,13 @@ enum ModelSchemaV1: VersionedSchema {
             self.price = price
             self.minifigCount = minifigCount
             self.minifigImageURL = minifigImageURL
+            self.minifigImage = nil
+            self.createdDate = Date()
+            
+            if !minifigImageURL.isEmpty {
+                let url = URL(string: minifigImageURL)!
+                self.downloadImage(from: url)
+            }
         }
         
         init(raw: [String]){
@@ -154,11 +190,32 @@ enum ModelSchemaV1: VersionedSchema {
             }
             self.minifigCount = 0
             self.minifigImageURL = ""
+            self.minifigImage = nil
+            self.createdDate = Date()
         }
         
         // API 모델 >> SwiftData 모델로 변환
         convenience init(minifig: MinifigApiModel.Minifig){
             self.init(minifigID: minifig.minifigNumber, minifigName: minifig.name, themeCategory: minifig.category, includedSetID: [], price: 0, minifigCount: 0, minifigImageURL: "")
+        }
+        
+        // url에서 데이터 받기
+        private func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+            URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+        }
+        
+        // 실제 호출되는 다운로드 이미지
+        func downloadImage(from url: URL) {
+            print("Download Started")
+            getData(from: url) { data, response, error in
+                guard let data = data, error == nil else { return }
+                print(response?.suggestedFilename ?? url.lastPathComponent)
+                print("Download Finished")
+                // 작업 완료 후 메인 쓰레드로
+                DispatchQueue.main.async() { [weak self] in
+                    self?.minifigImage = data
+                }
+            }
         }
     }
     
