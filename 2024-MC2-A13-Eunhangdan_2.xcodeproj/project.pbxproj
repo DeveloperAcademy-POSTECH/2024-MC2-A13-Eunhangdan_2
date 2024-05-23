@@ -34,6 +34,10 @@
 		40C31E632BFCC2AA001BDB84 /* Brickset-minifigs-owned.csv in Resources */ = {isa = PBXBuildFile; fileRef = 40C31E612BFCC2AA001BDB84 /* Brickset-minifigs-owned.csv */; };
 		40C31E662BFCC2D0001BDB84 /* MinifigureTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C31E642BFCC2D0001BDB84 /* MinifigureTabView.swift */; };
 		40C31E672BFCC2D0001BDB84 /* MinifigureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C31E652BFCC2D0001BDB84 /* MinifigureView.swift */; };
+		40C31E802BFEEF4C001BDB84 /* RegisterMinifigSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C31E7F2BFEEF4C001BDB84 /* RegisterMinifigSearchView.swift */; };
+		40C31E822BFEEF76001BDB84 /* RegisterMinifigureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C31E812BFEEF76001BDB84 /* RegisterMinifigureView.swift */; };
+		40C31E842BFEEF92001BDB84 /* Register_NoResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C31E832BFEEF92001BDB84 /* Register_NoResultView.swift */; };
+		40C31E862BFEEFA2001BDB84 /* Temp_RegisterationRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C31E852BFEEFA2001BDB84 /* Temp_RegisterationRootView.swift */; };
 		5B19C71A2BFE533F00AC0404 /* NewLEGO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B19C7192BFE533F00AC0404 /* NewLEGO.swift */; };
 		5B19C71C2BFE534A00AC0404 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B19C71B2BFE534A00AC0404 /* AddButton.swift */; };
 		5B19C71E2BFE535600AC0404 /* SearchLEGOBoxForAdding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B19C71D2BFE535600AC0404 /* SearchLEGOBoxForAdding.swift */; };
@@ -71,6 +75,10 @@
 		40C31E612BFCC2AA001BDB84 /* Brickset-minifigs-owned.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Brickset-minifigs-owned.csv"; sourceTree = "<group>"; };
 		40C31E642BFCC2D0001BDB84 /* MinifigureTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinifigureTabView.swift; sourceTree = "<group>"; };
 		40C31E652BFCC2D0001BDB84 /* MinifigureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinifigureView.swift; sourceTree = "<group>"; };
+		40C31E7F2BFEEF4C001BDB84 /* RegisterMinifigSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterMinifigSearchView.swift; sourceTree = "<group>"; };
+		40C31E812BFEEF76001BDB84 /* RegisterMinifigureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterMinifigureView.swift; sourceTree = "<group>"; };
+		40C31E832BFEEF92001BDB84 /* Register_NoResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register_NoResultView.swift; sourceTree = "<group>"; };
+		40C31E852BFEEFA2001BDB84 /* Temp_RegisterationRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temp_RegisterationRootView.swift; sourceTree = "<group>"; };
 		5B19C7192BFE533F00AC0404 /* NewLEGO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLEGO.swift; sourceTree = "<group>"; };
 		5B19C71B2BFE534A00AC0404 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		5B19C71D2BFE535600AC0404 /* SearchLEGOBoxForAdding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLEGOBoxForAdding.swift; sourceTree = "<group>"; };
@@ -204,6 +212,7 @@
 		40C31E692BFCCFC5001BDB84 /* Minifigure */ = {
 			isa = PBXGroup;
 			children = (
+				40C31E7E2BFEEF33001BDB84 /* MinifigAddingView */,
 				40C31E642BFCC2D0001BDB84 /* MinifigureTabView.swift */,
 				40C31E652BFCC2D0001BDB84 /* MinifigureView.swift */,
 			);
@@ -221,6 +230,17 @@
 				40C31E3A2BFCC235001BDB84 /* SeriesView.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		40C31E7E2BFEEF33001BDB84 /* MinifigAddingView */ = {
+			isa = PBXGroup;
+			children = (
+				40C31E7F2BFEEF4C001BDB84 /* RegisterMinifigSearchView.swift */,
+				40C31E812BFEEF76001BDB84 /* RegisterMinifigureView.swift */,
+				40C31E832BFEEF92001BDB84 /* Register_NoResultView.swift */,
+				40C31E852BFEEFA2001BDB84 /* Temp_RegisterationRootView.swift */,
+			);
+			path = MinifigAddingView;
 			sourceTree = "<group>";
 		};
 		5B19C7182BFE532800AC0404 /* BoxAddingView */ = {
@@ -308,6 +328,7 @@
 			files = (
 				40C31E292BFCC1F7001BDB84 /* ContentView.swift in Sources */,
 				40C31E572BFCC274001BDB84 /* Constants.swift in Sources */,
+				40C31E862BFEEFA2001BDB84 /* Temp_RegisterationRootView.swift in Sources */,
 				40C31E5D2BFCC292001BDB84 /* BoxDetailTextView.swift in Sources */,
 				40C31E582BFCC274001BDB84 /* SwiftData + Typealias.swift in Sources */,
 				40C31E402BFCC235001BDB84 /* SeriesView.swift in Sources */,
@@ -323,6 +344,8 @@
 				5B19C7202BFE536900AC0404 /* EmptySearchResultScreen.swift in Sources */,
 				40C31E662BFCC2D0001BDB84 /* MinifigureTabView.swift in Sources */,
 				7D4FD32D2BFCD5880032A839 /* BoxesView.swift in Sources */,
+				40C31E802BFEEF4C001BDB84 /* RegisterMinifigSearchView.swift in Sources */,
+				40C31E842BFEEF92001BDB84 /* Register_NoResultView.swift in Sources */,
 				40C31E672BFCC2D0001BDB84 /* MinifigureView.swift in Sources */,
 				40C31E462BFCC242001BDB84 /* SwiftDataTestView.swift in Sources */,
 				40C31E4F2BFCC255001BDB84 /* HandleCSV.swift in Sources */,
@@ -334,6 +357,7 @@
 				40C31E472BFCC242001BDB84 /* NetworkTestView.swift in Sources */,
 				40C31E272BFCC1F7001BDB84 /* EunhangdanVol2.swift in Sources */,
 				40C31E3D2BFCC235001BDB84 /* SearchResultView.swift in Sources */,
+				40C31E822BFEEF76001BDB84 /* RegisterMinifigureView.swift in Sources */,
 				5B19C71E2BFE535600AC0404 /* SearchLEGOBoxForAdding.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
