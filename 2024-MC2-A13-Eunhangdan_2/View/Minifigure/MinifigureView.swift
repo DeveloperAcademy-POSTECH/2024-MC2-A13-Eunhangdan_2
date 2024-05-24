@@ -122,11 +122,9 @@ struct villageCarousel<Content: View, Items: RandomAccessCollection>: View where
     var data: Items
     var itemWidth: CGFloat
     @Binding var activeID: UUID?
-    // @Binding var villages: [BrickVillege]
     @Binding var showMinifigureModal: Bool
     @ViewBuilder var content: (Items.Element, Bool, Int) -> Content
    
-    
     var body: some View {
         GeometryReader {
             let size = $0.size
@@ -193,6 +191,22 @@ struct VillageView: View{
                     .resizable()
                     .frame(width: 266, height: 216)
             }
+        }
+    }
+}
+
+//MARK: - 새로운 VillageView2 구현부
+struct VillageView2: View{
+    var villageImageString: String
+    var villageBackGroundColor : Color // 불필요하지만 1, 2 선택을 쉽게 하기 위해서 통일
+    
+    var body: some View{
+        HStack{
+                Image(villageImageString)
+                    .resizable()
+                    .frame(width: 330, height: 226)
+                    .cornerRadius(12.0)
+                    .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.25), radius: 5, y: 1)
         }
     }
 }

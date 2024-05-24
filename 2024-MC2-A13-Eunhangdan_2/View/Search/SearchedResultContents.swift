@@ -17,7 +17,7 @@ func searchedBrickSets(list: [BrickSet]) -> some View {
                     }
                     Text("\nReleased year: \(String(set.releasedDate))")
                 }
-                .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
+                .multilineTextAlignment(.leading)
                 .frame(height: 110)
                 Spacer()
             }

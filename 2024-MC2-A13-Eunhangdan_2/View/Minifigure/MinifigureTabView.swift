@@ -56,7 +56,7 @@ struct MinifigureTabView: View {
                         NavigationLink {
                             BrickVillageView(village: $villageList[index])
                         } label: {
-                            VillageView(villageImageString: item.villageImageString, villageBackGroundColor: item.villageBackGroundColor)
+                            VillageView2(villageImageString: item.villageImageString, villageBackGroundColor: item.villageBackGroundColor)
                         }
                     }.frame(width: 375,height: 245)
                     
