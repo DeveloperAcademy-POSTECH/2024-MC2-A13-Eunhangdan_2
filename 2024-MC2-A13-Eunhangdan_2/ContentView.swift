@@ -27,8 +27,7 @@ struct ContentView: View {
                     Image(systemName: "magnifyingglass")
                     Text("Search")
                 }
-            //MyPageView()
-            TotalTestView()
+            MyPageView()
                 .tabItem {
                     Image(systemName: "person.crop.circle")
                     Text("My Page")

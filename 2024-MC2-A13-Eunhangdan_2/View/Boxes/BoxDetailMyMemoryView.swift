@@ -28,12 +28,20 @@ struct BoxDetailMyMemoryView: View {
                     Spacer()
                     
                     //MARK: - 카메라 버튼 디자인 필요
-                    Button("Open camera") {
+                    Button {
                         self.showCamera.toggle()
+                    } label: {
+                        Image(systemName: "camera.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 28, height: 28)
+                            .padding(.trailing, 16)
                     }
                     .fullScreenCover(isPresented: self.$showCamera) {
                         accessCameraView(selectedImage: self.$selectedImage)
                     }
+                    
+                    
                     
                     PhotosPicker(
                         selection: $selectedItems,
