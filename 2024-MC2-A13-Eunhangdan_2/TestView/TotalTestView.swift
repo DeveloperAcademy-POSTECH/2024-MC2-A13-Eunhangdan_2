@@ -26,6 +26,12 @@ struct TotalTestView: View {
                 }
                 
                 NavigationLink {
+                    SwiftDataMinifigView()
+                } label: {
+                    Text("SwiftDataMinifigView")
+                }
+                
+                NavigationLink {
                     HandleCSVTestView(brickSets: loadBrickSetCSVData(), minifigs: loadMinifigCSVData())
                 } label: {
                     Text("HandleCSVTestView")

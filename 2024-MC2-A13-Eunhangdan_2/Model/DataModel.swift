@@ -182,14 +182,17 @@ enum ModelSchemaV1: VersionedSchema {
         }
         
         init(raw: [String]){
+            let firstIndexOfOwnedLoose = raw.firstIndex(of: "0")!
+            let lastIndexOfIncludedSets = firstIndexOfOwnedLoose - 2
+            let strValsOfIncludedSetID: [String] = Array(raw[4...lastIndexOfIncludedSets])
+            
             self.minifigID = raw[0]
             self.minifigName = raw[1]
             self.themeCategory = raw[3]
-            self.includedSetID = raw[4]
-                .components(separatedBy: ",")
-                .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-            if raw[8] != "" {
-                self.price = Double(raw[8])!
+            self.includedSetID = strValsOfIncludedSetID.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            
+            if raw[raw.count - 1] != "" {
+                self.price = Double(raw[raw.count - 1])!
             } else {
                 self.price = 0.0
             }
