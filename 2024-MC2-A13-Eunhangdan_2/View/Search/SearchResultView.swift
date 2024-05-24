@@ -1,96 +1,68 @@
 import Foundation
 import SwiftUI
+import SwiftData
 
 struct SearchResultView: View{
-    @State var searchText: String
+    @Binding var brickSetList: [BrickSet]
+    @Binding var limitedBrickSetList: [BrickSet]
+    @Binding var minifigsList: [Minifig]
+    @Binding var limitedMinifigsList: [Minifig]
+    @Binding var searchActivated: Bool
     
     var body: some View {
-        VStack{
-            HStack{
-                Text("about \(searchText)").font(.title)
+        NavigationStack {
+            VStack{
+                Text("")
+                    .frame(height: 10)
+                NavigationLink {
+                    ScrollView {
+                        searchedBrickSets(list: brickSetList)
+                    }
+                } label: {
+                    HStack{
+                        Text("LEGO Search Result")
+                            .font(.title2)
+                            .bold()
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                    }
+                }
+                searchedBrickSets(list: limitedBrickSetList)
+                Spacer()
+                
+                Divider()
+                
+                NavigationLink {
+                    ScrollView{
+                        searchedMinifigure(list: minifigsList)
+                    }
+                } label: {
+                    HStack{
+                        Text("Minifigure Search Result")
+                            .font(.title2)
+                            .bold()
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                    }
+                }
+                searchedMinifigure(list: limitedMinifigsList)
                 Spacer()
             }
-            Spacer()
-            HStack{
-                Text("LEGO Search Result")
-                    .font(.title)
-                    .bold()
-                Spacer()
-                NavigationLink {
-                    SearchedLEGODetailView()
-                } label: {
-                    Image(systemName: "chevron.right")
+            .padding()
+            .navigationBarTitle("Search Result", displayMode: .inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        searchActivated = false
+                    } label: {
+                        Text("Back")
+                    }
                 }
             }
-            makeBoxList()
-            Divider()
-            HStack{
-                Text("Minifigure Search Result")
-                    .font(.title)
-                    .bold()
-                Spacer()
-                NavigationLink {
-                    SearchedMinifigureDetailView()
-                } label: {
-                    Image(systemName: "chevron.right")
-                }
-            }
-            makeMiniFigureList()
-        }.padding()
-        
-    }
-}
-
-@ViewBuilder
-func makeBoxList() -> some View {
-    HStack{
-        Rectangle()
-            .frame(width: 150, height: 130)
-        
-        Spacer()
-        VStack{
-            Text("Minions - The rise of Gru")
-            Text("")
-            Text("Released Date: 2020.12.11")
         }
-    }
-    HStack{
-        Rectangle()
-            .frame(width: 150, height: 130)
-        Spacer()
-        VStack{
-            Text("Minions - The rise of Gru")
-            Text("")
-            Text("Released Date: 2020.12.11")
-        }
-    }
-    
-}
-
-@ViewBuilder
-func makeMiniFigureList() -> some View {
-    HStack{
-        Rectangle()
-            .frame(width: 150, height: 130)
-        VStack{
-            Text("Minions - The rise of Gru")
-            Text("")
-            Text("Released Date: 2020.12.11")
-        }
-        Spacer()
-    }
-    HStack{
-        Rectangle()
-            .frame(width: 150, height: 130)
-        VStack{
-            Text("Minions - The rise of Gru")
-            Text("")
-            Text("Released Date: 2020.12.11")
-        }
-        Spacer()
     }
 }
 
 #Preview {
-    SearchResultView(searchText: "")
+    SearchResultView(brickSetList: .constant([]), limitedBrickSetList: .constant([]), minifigsList: .constant([]), limitedMinifigsList: .constant([]), searchActivated: .constant(true))
 }
