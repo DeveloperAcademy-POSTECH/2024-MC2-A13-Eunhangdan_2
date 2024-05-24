@@ -13,7 +13,6 @@ func searchedBrickSets(list: [BrickSet]) -> some View {
         NavigationLink {
             BoxDetailView(brickSetID: set.setID)
         } label: {
-            
                 AsyncImage(url: URL(string: "\(set.setImageURL)")) {image in
                     image
                         .resizable()
@@ -44,7 +43,7 @@ func searchedMinifigure(list: [Minifig]) -> some View {
     ForEach(list, id: \.minifigID) { mini in
         HStack {
         NavigationLink {
-            MinifigureModalView()
+//            MinifigureModalView()
         } label: {
             
             AsyncImage(url: URL(string: "\(mini.minifigImageURL)")) {image in
