@@ -44,7 +44,7 @@ func searchedMinifigure(list: [Minifig]) -> some View {
     ForEach(list, id: \.minifigID) { mini in
         HStack {
         NavigationLink {
-            MinifigureModalView()
+//            MinifigureModalView()
         } label: {
             
             AsyncImage(url: URL(string: "\(mini.minifigImageURL)")) {image in
