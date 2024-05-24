@@ -30,15 +30,20 @@ enum ModelSchemaV1: VersionedSchema {
         }
     }
     
-    @Model class Coordinate {
-        var x: Double
-        var y: Double
-        
-        init(x: Double = 0.0 , y: Double = 0.0) {
-            self.x = x
-            self.y = y
-        }
-    }
+//    @Model
+//    class Coordinate {
+//        var id: UUID = UUID()
+//        var x: Double
+//        var y: Double
+//        var rotationDegree: Int // 회전 정도
+//        //@Relationship(deleteRule: .nullify, inverse: \BrickVillege.minifigureHoleCoordinate) weak var parentVillage: BrickVillege?
+//        
+//        init(x: Double = 0.0 , y: Double = 0.0, rotationDegree: Int = 0) {
+//            self.x = x
+//            self.y = y
+//            self.rotationDegree = rotationDegree
+//        }
+//    }
     
     //MARK: - BrickSet 모델 정의
     @Model
@@ -224,18 +229,25 @@ enum ModelSchemaV1: VersionedSchema {
     final class BrickVillege {
         @Attribute(.unique) var backgroundID: UUID
         var backgroundName: String // 배경 이름
-        @Attribute(.externalStorage) var backgroundImage: Data // 배경 이미지
+        @Attribute(.externalStorage) var backgroundImage: Data? // 배경 이미지
         var categoryInfo: String // 카테고리 정보
-        @Relationship(.unique) var minifigureHoleCoordinate: [Coordinate] // 미니피규어 좌표, 아래와 배열 인덱스로 조율, 필요 없을지도?
-        var registeredMinifigureID: [Int] // 등록된 미니피규어 아이디(품번)
+       //  @Relationship(deleteRule: .cascade) var minifigureHoleCoordinate: [Coordinate] // 미니피규어 좌표, 아래와 배열 인덱스로 조율, 필요 없을지도?
+        // @Relationship(deleteRule: .cascade, inverse: \Coordinate.parentVillage)
+        var registeredMinifigureID: [String] // 등록된 미니피규어 아이디(품번)
+        //var minifigureHoleCoordinate: [Coordinate]// 미니피규어 좌표
+        var xCoordi: [Double] = []
+        var yCoordi: [Double] = []
+        var rotationDegree: [Double] = []
         
-        init(backgroundID: UUID, backgroundName: String, backgroundImage: Data, categoryInfo: String, minifigureHoleCoordinate: [Coordinate], registeredMinifigureID: [Int]) {
+        init(backgroundID: UUID, backgroundName: String, backgroundImage: Data? = nil, categoryInfo: String, registeredMinifigureID: [String], xCoordi: [Double], yCoordi: [Double], rotationDegree: [Double]) {
             self.backgroundID = backgroundID
             self.backgroundName = backgroundName
             self.backgroundImage = backgroundImage
             self.categoryInfo = categoryInfo
-            self.minifigureHoleCoordinate = minifigureHoleCoordinate
             self.registeredMinifigureID = registeredMinifigureID
+            self.xCoordi = xCoordi
+            self.yCoordi = yCoordi
+            self.rotationDegree = rotationDegree
         }
     }
 }
