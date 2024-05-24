@@ -6,34 +6,31 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct BrickVillageView: View {
+//    
+//    
+//    typealias BrickVillege = ModelSchemaV1.BrickVillege
+    
+    @Environment (\.modelContext) private var modelContext
     @State private var hideNavigationBar = false
     @State var presentSheet = false
+    @State var minifigs: [Minifig] = []
     
-    @State var img0: String = "whoAreYou"
-    @State var img1: String = "whoAreYou"
-    @State var img2: String = "whoAreYou"
+    // 갱과 연동 후
+    @State private var village: BrickVillege = BrickVillege(backgroundID: UUID(), backgroundName: "village03", categoryInfo: "StarWars", minifigureHoleCoordinate: [
+        Coordinate(x: 100, y: 200, rotationDegree: -15),
+        Coordinate(x: 300, y: 500, rotationDegree: -90),
+        Coordinate(x: 200, y: 700, rotationDegree: 25)
+    ], registeredMinifigureID: ["whoAreYou", "whoAreYou", "whoAreYou"])
     
-    @State var img_mf: [String] = ["tlm089","tlm107","tlm108","tlm109"]
+    @State private var selectedMinifigIndex: Int = 0
     
-    class Coordinate {
-        var x: Double
-        var y: Double
-        
-        init(x: Double = 0.0 , y: Double = 0.0) {
-            self.x = x
-            self.y = y
-        }
-    }
-    
-    @State var coordinates: [Coordinate] = [Coordinate(x: 100, y: 200),
-                                            Coordinate(x: 300, y: 500),
-                                            Coordinate(x: 200, y: 700)]
     
     var body: some View {
         ZStack {
-            Image("village03")
+            Image("\(village.backgroundName)")
                 .resizable()
                 .edgesIgnoringSafeArea(.all)
                 .onTapGesture(count: 1) {    // 화면을 탭해서 네비게이션바 hide
@@ -41,47 +38,22 @@ struct BrickVillageView: View {
                     self.hideNavigationBar.toggle()
                 }
             
-            // Btn1
-            Button(action: {
-                presentSheet = true
-            }) {
-                Image("\(img0)")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 100, height: 100)
-                    .rotationEffect(.degrees(-15))
+            
+            ForEach(village.minifigureHoleCoordinate.indices , id: \.self) { index in
+                Button(action: {
+                    presentSheet = true
+                    selectedMinifigIndex = index
+                }) {
+                    Image("\(village.registeredMinifigureID[index])")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 100, height: 100)
+                        .rotationEffect(.degrees(Double(village.minifigureHoleCoordinate[index].rotationDegree)))
+                    
+                }
+                .position(CGPoint(x: village.minifigureHoleCoordinate[index].x ,y: village.minifigureHoleCoordinate[index].y))
                 
             }
-            .position(CGPoint(x: coordinates[0].x, y: coordinates[0].y))
-            
-            // Btn2
-            Button(action: {
-                presentSheet = true
-            }) {
-                Image("\(img1)")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 100, height: 100)
-                    .rotationEffect(.degrees(-90))
-                
-            }
-            .position(CGPoint(x: coordinates[1].x, y: coordinates[1].y))
-            
-            
-            // Btn3
-            Button(action: {
-                presentSheet = true
-            }) {
-                Image("\(img2)")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 100, height: 100)
-                    .rotationEffect(.degrees(25))
-                
-            }
-            .position(CGPoint(x: coordinates[2].x, y: coordinates[2].y))
-            
-            
         }  // ZStack
         .sheet(isPresented: $presentSheet, onDismiss: didDismiss) {
             VStack {
@@ -114,18 +86,18 @@ struct BrickVillageView: View {
                 HStack {
                     // 타이틀까지 찌그러지~~~~잔아~~~~~ㅁㅊ~~~~~
                     // 뷰를 따로 올려야 할 것 같은 느낌..갱의 코드를 참고하러 떠나자..
-                    ForEach(img_mf, id: \.self) { mf in
+                    ForEach(minifigs, id: \.self) { mf in
                         Button(action: {
-                            
-                            img0 = mf
-                            
                             presentSheet = false
-                        }){
-                            Image(mf)
+                            // 선택 시, village.registeredMinifigure에 정보를 넣어야함
+                            village.registeredMinifigureID[selectedMinifigIndex] = mf.minifigID
+                        }, label: {
+                            Image(mf.minifigID)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 100, height: 200)
-                        }
+                        })
+                        
                         
                     }  // ForEach
                     
@@ -136,11 +108,22 @@ struct BrickVillageView: View {
             //.presentationDragIndicator(.visible)  // grabber
             
         } // sheet
-        
+        .onAppear{
+            loadMinifgs()
+        }
         .navigationBarHidden(hideNavigationBar)
         .navigationBarTitle("Hogwarts Moment Class", displayMode: .inline)
         .edgesIgnoringSafeArea([.top, .bottom])
         .toolbar(.hidden, for: .tabBar)
+        .onDisappear {
+            do {
+                modelContext.insert(village)
+                try modelContext.save()
+            }catch {
+                print("Error: failed to save village")
+            }
+        }
+        
         
     } //body
     
@@ -148,7 +131,19 @@ struct BrickVillageView: View {
         // Handle the dismissing action.
     }
     
-    
+    func loadMinifgs() {
+        do {
+            let setPredicate = #Predicate<Minifig> {
+                // $0.splitCategory[0] == village.categoryInfo
+                $0.price == 0
+            }
+
+            let descriptor = FetchDescriptor<Minifig>(predicate: setPredicate)
+            minifigs = try modelContext.fetch(descriptor)
+        } catch {
+            print("Error: failed to load Minifigs in VillageView")
+        }
+    }
 }  // BrickVillageView
 
 

@@ -30,13 +30,18 @@ enum ModelSchemaV1: VersionedSchema {
         }
     }
     
-    @Model class Coordinate {
+    @Model
+    class Coordinate {
+        var id: UUID = UUID()
         var x: Double
         var y: Double
+        var rotationDegree: Int // 회전 정도
+        //@Relationship(deleteRule: .nullify, inverse: \BrickVillege.minifigureHoleCoordinate) weak var parentVillage: BrickVillege?
         
-        init(x: Double = 0.0 , y: Double = 0.0) {
+        init(x: Double = 0.0 , y: Double = 0.0, rotationDegree: Int = 0) {
             self.x = x
             self.y = y
+            self.rotationDegree = rotationDegree
         }
     }
     
@@ -224,12 +229,14 @@ enum ModelSchemaV1: VersionedSchema {
     final class BrickVillege {
         @Attribute(.unique) var backgroundID: UUID
         var backgroundName: String // 배경 이름
-        @Attribute(.externalStorage) var backgroundImage: Data // 배경 이미지
+        @Attribute(.externalStorage) var backgroundImage: Data? // 배경 이미지
         var categoryInfo: String // 카테고리 정보
-        @Relationship(.unique) var minifigureHoleCoordinate: [Coordinate] // 미니피규어 좌표, 아래와 배열 인덱스로 조율, 필요 없을지도?
-        var registeredMinifigureID: [Int] // 등록된 미니피규어 아이디(품번)
-        
-        init(backgroundID: UUID, backgroundName: String, backgroundImage: Data, categoryInfo: String, minifigureHoleCoordinate: [Coordinate], registeredMinifigureID: [Int]) {
+       //  @Relationship(deleteRule: .cascade) var minifigureHoleCoordinate: [Coordinate] // 미니피규어 좌표, 아래와 배열 인덱스로 조율, 필요 없을지도?
+        // @Relationship(deleteRule: .cascade, inverse: \Coordinate.parentVillage)
+        @Relationship(deleteRule: .cascade) var minifigureHoleCoordinate: [Coordinate]// 미니피규어 좌표
+        var registeredMinifigureID: [String] // 등록된 미니피규어 아이디(품번)
+       
+        init(backgroundID: UUID, backgroundName: String, backgroundImage: Data? = nil, categoryInfo: String, minifigureHoleCoordinate: [Coordinate] = [], registeredMinifigureID: [String]) {
             self.backgroundID = backgroundID
             self.backgroundName = backgroundName
             self.backgroundImage = backgroundImage
