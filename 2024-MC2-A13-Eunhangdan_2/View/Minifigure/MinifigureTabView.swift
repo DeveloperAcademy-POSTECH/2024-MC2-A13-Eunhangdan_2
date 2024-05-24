@@ -17,19 +17,21 @@ struct MinifigureTabView: View {
     @Query(sort: \Minifig.themeCategory) var minifigs: [Minifig]
     @State var themeArray: [String] = []
     @State var themeFilteredMinifigs: [[Minifig]] = []
-    @State var forCaroucel: [[minifigureItem]] = [] //
+    @State var minifigItemsPerTheme: [[MinifigureItem]] = [] //
     @State var subThemeArray: [String: String] = [:]
-    @State var villageImage: [villageItem] = [
-        .init(villageImageString: "Village", villageBackGroundColor: .yellow),
-        .init(villageImageString: "Village", villageBackGroundColor: .blue),
-        .init(villageImageString: "Village", villageBackGroundColor: .mint),
-        .init(villageImageString: "Village", villageBackGroundColor: .cyan),
-        .init(villageImageString: "Village", villageBackGroundColor: .green),
-        .init(villageImageString: "Village", villageBackGroundColor: .brown)
+    @State var villageImage: [VillageItem] = [
+        .init(villageImageString: "village01", villageBackGroundColor: .yellow),
+        .init(villageImageString: "village02", villageBackGroundColor: .blue),
+        .init(villageImageString: "village03", villageBackGroundColor: .mint),
+        .init(villageImageString: "village04", villageBackGroundColor: .cyan),
     ]
     @State var selectedDetailIndex: Int = 0 // 1차 배열
     
+    @State var selectedMinifigItem: MinifigureItem = MinifigureItem(minifigureImage: "", minifigureSubTheme: "", minifigureTheme: "", minifigureName: "", minifigureIncludeSetId: [], minifigureCreatedDate: Date())
+    
+    
     let textLeftedge : CGFloat = 30
+    
     var body: some View {
         NavigationStack(){
             ScrollView{
@@ -40,11 +42,14 @@ struct MinifigureTabView: View {
                             .bold()
                         Spacer()
                     }.padding(.leading, textLeftedge)
-                    ZStack{
-                        villageCarousel(data: villageImage, itemWidth: 315, activeID: $scrolledID, showMinifigureModal: $showMinifigureModal){item, isFocused  in
-                            VillageView(villageImageString: item.villageImageString, villageBackGroundColor: item.villageBackGroundColor)
-                        }
+                    
+                    
+                    villageCarousel(data: villageImage, itemWidth: 315, activeID: $scrolledID, showMinifigureModal: $showMinifigureModal){item, isFocused  in
+                        
+                        VillageView(villageImageString: item.villageImageString, villageBackGroundColor: item.villageBackGroundColor)
                     }.frame(width: 375,height: 245)
+                    
+                    
                     Spacer(minLength: 30)
                     
                     ForEach(Array(themeArray.enumerated()) , id: \.offset){ index, theme in
@@ -57,8 +62,15 @@ struct MinifigureTabView: View {
                             }
                             VStack{
                                 Spacer(minLength: 10)
+                                
                                 HStack(alignment: .bottom){
-                                    NavigationLink(destination: MinifigureListView(selectedSubDetailIndex: $selectedDetailIndex, showMinifigureModal: $showMinifigureModal, minifigures: $forCaroucel[index])){
+                                    NavigationLink(destination: 
+                                                    MinifigureListView(
+                                                        selectedSubDetailIndex: $selectedDetailIndex,
+                                                        selectedMinifigItem: $selectedMinifigItem,
+                                                        showMinifigureModal: $showMinifigureModal,
+                                                        minifigures: $minifigItemsPerTheme[index])
+                                    ) {
                                         Text("\(theme)")
                                             .font(.title2)
                                             .bold()
@@ -67,21 +79,23 @@ struct MinifigureTabView: View {
                                             .font(.system(size: 22))
                                             .foregroundColor(.gray)
                                     }
+                                    
                                     Button(action: {
                                         
                                     }, label: {
                                         
                                     })
                                     .sheet(isPresented: self.$showMinifigureModal, content: {
-                                        MinifigureModalView(forCaroucel: $forCaroucel[selectedDetailIndex], subThemeIndex: selectedDetailIndex)
+                                        MinifigureModalView(minifigureForDetail: $selectedMinifigItem, subThemeIndex: selectedDetailIndex)
                                             .presentationDetents([.medium])
                                             .presentationDragIndicator(.visible)
                                     })
                                     Spacer()
                                 }.padding(.leading, textLeftedge)
-                                Carousel(minifigureImages: forCaroucel[index], itemWidth: 55.5, itemHeight: 104, selectedSubDetailIndex: $selectedDetailIndex,activeID: $scrolledID, showMinifigureModal: $showMinifigureModal) { item, isFocused in
+                                
+                                Carousel(minifigureImages: minifigItemsPerTheme[index], itemWidth: 55.5, itemHeight: 104, selectedSubDetailIndex: $selectedDetailIndex,activeID: $scrolledID, selectedMinifigItem: $selectedMinifigItem, showMinifigureModal: $showMinifigureModal) { item, isFocused in
                                     MinifigureView(minifigureImage: item.minifigureImage, isFocused: isFocused, legoHeight: 104, selectedSubDetailIndex: $selectedDetailIndex)
-                                        
+                                    
                                 }
                                 Spacer(minLength: 10)
                             }.frame(width: 393, height: 180)
@@ -101,7 +115,7 @@ struct MinifigureTabView: View {
             }
             let noDuplicateTheme = Set(themeArray)
             self.themeArray = Array(noDuplicateTheme).sorted()
-
+            
             for theme in self.themeArray {
                 let filteredMinifigs = minifigs.filter {
                     $0.splitCategory[0] == theme
@@ -110,9 +124,9 @@ struct MinifigureTabView: View {
             }
             for oneThemeMinifigArray in themeFilteredMinifigs {
                 let arr = oneThemeMinifigArray.map{
-                    return minifigureItem(minifigureImage: $0.minifigID, minifigureSubTheme: $0.splitCategory[1], minifigureTheme: $0.splitCategory[0], minifigureName: $0.minifigName, minifigureIncludeSetId: $0.includedSetID, minifigureCreatedDate: $0.createdDate)
+                    return MinifigureItem(minifigureImage: $0.minifigID, minifigureSubTheme: $0.splitCategory[1], minifigureTheme: $0.splitCategory[0], minifigureName: $0.minifigName, minifigureIncludeSetId: $0.includedSetID, minifigureCreatedDate: $0.createdDate)
                 }
-                forCaroucel.append(arr)
+                minifigItemsPerTheme.append(arr)
             }
         }
     }
