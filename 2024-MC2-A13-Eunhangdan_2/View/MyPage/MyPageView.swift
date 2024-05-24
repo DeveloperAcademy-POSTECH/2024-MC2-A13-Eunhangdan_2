@@ -31,7 +31,7 @@ struct MyPageView: View {
                                 Spacer().frame(height: 13)
                                 
                                 Text("Hello, 최승원 님")
-                                    .font(.title2)
+                                    .font(.title)
                                     .bold()
                             }
                             Spacer()
@@ -40,22 +40,21 @@ struct MyPageView: View {
                     }
                     
                     // 1번 섹션
-                    Section(header: Text("나의 수집 기록")
-                        .foregroundStyle(.black)
-                        .bold()
-                        .font(.title2)) {
+                    Section {
                             HStack{
                                Image("userLEGOnumber")
                                     .resizable()
                                     .frame(width: 31, height: 37)
                                 VStack(alignment: .leading){
-                                    Text("보유 레고 개수")
+                                    Text("LEGO You own")
                                         .bold()
-                                    Text("\(LEGOsets.count)개")
+                                    Text("\(LEGOsets.count)")
                                         .font(.subheadline)
                                         .opacity(0.6)
                                 }
                             }
+                    } header: {
+                    Text("My collecttion")
                     }
                     .listSectionSpacing(15)
                     
@@ -65,9 +64,9 @@ struct MyPageView: View {
                                     .resizable()
                                     .frame(width: 35, height: 25)
                                 VStack(alignment: .leading){
-                                    Text("보유 피규어 개수")
+                                    Text("Minifigure You own")
                                         .bold()
-                                    Text("\(minifigs.count)개")
+                                    Text("\(minifigs.count)")
                                         .font(.subheadline)
                                         .opacity(0.6)
                                 }
@@ -75,30 +74,34 @@ struct MyPageView: View {
                     }
                     
                     // 3번 섹션
-                    Section(header: Text("기타")
-                        .foregroundStyle(.black)
-                        .bold()
-                        .font(.title2)) {
+                    Section {
                         NavigationLink {
                             MyPageIfYouNeedHelpView()
                         } label: {
-                            Text("도움이 필요하다면?")
+                            Text("Help")
                         }
                         
                         NavigationLink {
-                            
+                            MyPageWhoMadeThis()
                         } label: {
-                            Text("제작한 사람들")
+                            Text("Credit")
                         }
                         
-                        NavigationLink {
-                            
-                        } label: {
-                            Text("버전")
-                        }
+//                        NavigationLink {
+//                            
+//                        } label: {
+                            HStack{
+                                Text("Version")
+                                Text("1.0.0")
+                                    .padding(.leading, 8)
+                            }
+//                        }
 
+                    } header: {
+                    Text("other")
                     }
                 
+                    
                 }
                 .navigationTitle("My Page")
             }
