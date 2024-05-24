@@ -63,17 +63,15 @@ struct SearchLEGOBoxForAdding: View {
                                 isProductSelected = true
                             } label: {
                                 Text("Choose")
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .stroke(.black, lineWidth: 1)
-                                            .padding()
-                                    )
+                                    .padding(5)
+                                    .background(.gray.opacity(0.12))
+                                    .clipShape(RoundedRectangle(cornerRadius: 12))
                             }
                         }
                         
                     }
                 }
-
+                
             }
         } else {
             Spacer()
