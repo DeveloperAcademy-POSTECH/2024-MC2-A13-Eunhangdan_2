@@ -29,6 +29,12 @@ struct MinifigureTabView: View {
     
     @State var selectedMinifigItem: MinifigureItem = MinifigureItem(minifigureImage: "", minifigureSubTheme: "", minifigureTheme: "", minifigureName: "", minifigureIncludeSetId: [], minifigureCreatedDate: Date())
     
+    @State private var villageList: [BrickVillege] = [
+        BrickVillege(backgroundID: UUID(), backgroundName: "village01", categoryInfo: "Town", registeredMinifigureID: ["whoAreYou", "whoAreYou", "whoAreYou"], xCoordi:[100, 300, 200], yCoordi: [200, 500, 700], rotationDegree: [-15, -90, 25]),
+        BrickVillege(backgroundID: UUID(), backgroundName: "village02", categoryInfo: "Town", registeredMinifigureID: ["whoAreYou", "whoAreYou", "whoAreYou"], xCoordi:[100, 300, 200], yCoordi: [200, 500, 700], rotationDegree: [-15, -90, 25]),
+        BrickVillege(backgroundID: UUID(), backgroundName: "village03", categoryInfo: "Town", registeredMinifigureID: ["whoAreYou", "whoAreYou", "whoAreYou"], xCoordi:[100, 300, 200], yCoordi: [200, 500, 700], rotationDegree: [-15, -90, 25]),
+        BrickVillege(backgroundID: UUID(), backgroundName: "village04", categoryInfo: "Town", registeredMinifigureID: ["whoAreYou", "whoAreYou", "whoAreYou"], xCoordi:[100, 300, 200], yCoordi: [200, 500, 700], rotationDegree: [-15, -90, 25])
+    ]
     
     let textLeftedge : CGFloat = 30
     
@@ -42,8 +48,16 @@ struct MinifigureTabView: View {
                             .bold()
                         Spacer()
                     }.padding(.leading, textLeftedge)
-                    villageCarousel(data: villageImage, itemWidth: 315, activeID: $scrolledID, showMinifigureModal: $showMinifigureModal){item, isFocused  in
-                        VillageView(villageImageString: item.villageImageString, villageBackGroundColor: item.villageBackGroundColor)
+                    
+                    
+                    villageCarousel(data: villageImage, itemWidth: 315, activeID: $scrolledID,
+                                   // villages: $villageList,
+                                    showMinifigureModal: $showMinifigureModal){item, isFocused, index  in
+                        NavigationLink {
+                            BrickVillageView(village: $villageList[index])
+                        } label: {
+                            VillageView(villageImageString: item.villageImageString, villageBackGroundColor: item.villageBackGroundColor)
+                        }
                     }.frame(width: 375,height: 245)
                     
                     Spacer(minLength: 30)
@@ -60,7 +74,7 @@ struct MinifigureTabView: View {
                                 Spacer(minLength: 10)
                                 
                                 HStack(alignment: .bottom){
-                                    NavigationLink(destination: 
+                                    NavigationLink(destination:
                                                     MinifigureListView(
                                                         selectedSubDetailIndex: $selectedDetailIndex,
                                                         selectedMinifigItem: $selectedMinifigItem,

@@ -122,8 +122,10 @@ struct villageCarousel<Content: View, Items: RandomAccessCollection>: View where
     var data: Items
     var itemWidth: CGFloat
     @Binding var activeID: UUID?
+    // @Binding var villages: [BrickVillege]
     @Binding var showMinifigureModal: Bool
-    @ViewBuilder var content: (Items.Element, Bool) -> Content
+    @ViewBuilder var content: (Items.Element, Bool, Int) -> Content
+   
     
     var body: some View {
         GeometryReader {
@@ -131,15 +133,14 @@ struct villageCarousel<Content: View, Items: RandomAccessCollection>: View where
             VStack {
                 ScrollView(.horizontal) {
                     LazyHStack(alignment: .center) {
-                        ForEach(data) { item in
+                        ForEach(Array(data.enumerated()), id: \.element.id) { index, item in
                             let isFocused = isItemFocused(item)
                             Button(action: {
                                 
                             }, label: {
-                                content(item, isFocused)
+                                content(item, isFocused, index)
                                     .frame(width: itemWidth)
                             })
-                            
                         }
                         .padding(10)
                     }
@@ -156,6 +157,7 @@ struct villageCarousel<Content: View, Items: RandomAccessCollection>: View where
         return item.id == activeID as? Items.Element.ID
     }
 }
+
 //MARK: - Minifigure View 구현부
 struct MinifigureView: View {
     var minifigureImage: String
