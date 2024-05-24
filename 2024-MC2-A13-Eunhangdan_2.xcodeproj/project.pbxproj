@@ -39,6 +39,7 @@
 		40C31E842BFEEF92001BDB84 /* Register_NoResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C31E832BFEEF92001BDB84 /* Register_NoResultView.swift */; };
 		40C31E862BFEEFA2001BDB84 /* Temp_RegisterationRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C31E852BFEEFA2001BDB84 /* Temp_RegisterationRootView.swift */; };
 		40C31E882BFF1C3D001BDB84 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C31E872BFF1C3D001BDB84 /* MyPageView.swift */; };
+		40C31E8F2C00B455001BDB84 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C31E8E2C00B455001BDB84 /* SplashView.swift */; };
 		5B19C71A2BFE533F00AC0404 /* NewLEGO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B19C7192BFE533F00AC0404 /* NewLEGO.swift */; };
 		5B19C71C2BFE534A00AC0404 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B19C71B2BFE534A00AC0404 /* AddButton.swift */; };
 		5B19C71E2BFE535600AC0404 /* SearchLEGOBoxForAdding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B19C71D2BFE535600AC0404 /* SearchLEGOBoxForAdding.swift */; };
@@ -85,6 +86,7 @@
 		40C31E832BFEEF92001BDB84 /* Register_NoResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register_NoResultView.swift; sourceTree = "<group>"; };
 		40C31E852BFEEFA2001BDB84 /* Temp_RegisterationRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temp_RegisterationRootView.swift; sourceTree = "<group>"; };
 		40C31E872BFF1C3D001BDB84 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
+		40C31E8E2C00B455001BDB84 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		5B19C7192BFE533F00AC0404 /* NewLEGO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLEGO.swift; sourceTree = "<group>"; };
 		5B19C71B2BFE534A00AC0404 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		5B19C71D2BFE535600AC0404 /* SearchLEGOBoxForAdding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLEGOBoxForAdding.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				40C31E412BFCC242001BDB84 /* TestView */,
 				40C31E342BFCC235001BDB84 /* View */,
 				40C31E262BFCC1F7001BDB84 /* EunhangdanVol2.swift */,
+				40C31E8E2C00B455001BDB84 /* SplashView.swift */,
 				40C31E282BFCC1F7001BDB84 /* ContentView.swift */,
 				40C31E2A2BFCC1F7001BDB84 /* Assets.xcassets */,
 				40C31E2C2BFCC1F7001BDB84 /* Preview Content */,
@@ -365,6 +368,7 @@
 				40C31E402BFCC235001BDB84 /* SeriesView.swift in Sources */,
 				40C31E482BFCC242001BDB84 /* TotalTestView.swift in Sources */,
 				40C31E3C2BFCC235001BDB84 /* SearchedMinifigureDetailView.swift in Sources */,
+				40C31E8F2C00B455001BDB84 /* SplashView.swift in Sources */,
 				40C31E532BFCC25F001BDB84 /* NetworkManager.swift in Sources */,
 				40C31E882BFF1C3D001BDB84 /* MyPageView.swift in Sources */,
 				7D4FD32F2BFCD5A00032A839 /* BoxesGrid.swift in Sources */,
