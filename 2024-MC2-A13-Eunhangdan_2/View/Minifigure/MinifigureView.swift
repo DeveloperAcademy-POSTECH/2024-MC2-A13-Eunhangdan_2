@@ -14,6 +14,9 @@ struct minifigureItem: Identifiable {
     var minifigureImage: String
     var minifigureSubTheme: String
     var minifigureTheme: String
+    var minifigureName: String
+    var minifigureIncludeSetId: [String]
+    var minifigureCreatedDate: Date
 }
 struct villageItem: Identifiable {
     let id: UUID = .init()
@@ -25,6 +28,9 @@ struct Carousel<Content: View, minifigImages: RandomAccessCollection>: View wher
     var minifigureImages: minifigImages
     var itemWidth: CGFloat
     var itemHeight: CGFloat
+    
+    @Binding var selectedSubDetailIndex: Int
+    
     @Binding var activeID: UUID?
     @Binding var showMinifigureModal: Bool
     @ViewBuilder var content: (minifigImages.Element, Bool) -> Content
@@ -51,6 +57,7 @@ struct Carousel<Content: View, minifigImages: RandomAccessCollection>: View wher
                                                 )
                                         }
                                 })
+                                
                             }
                             .padding(10)
                         }
@@ -147,6 +154,7 @@ struct MinifigureView: View {
     var minifigureImage: String
     var isFocused: Bool = false
     var legoHeight: CGFloat
+    @Binding var selectedSubDetailIndex: Int
     
     var body: some View {
         VStack {
@@ -184,29 +192,37 @@ struct VillageView: View{
 
 //MARK: - Minifigure Modal View 구현부
 struct MinifigureModalView: View{
+    @Binding var forCaroucel: [minifigureItem]
+    var subThemeIndex: Int
     var body: some View {
         VStack{
             Spacer(minLength: 16.5)
-            HStack(){
-                Text("")
-                    .font(.title2)
-                    .bold()
-                    .padding(.leading, 16)
-                    .multilineTextAlignment(.leading)
-                Spacer()
+            ScrollView(.horizontal, showsIndicators: false){
+                HStack(){
+                    Text("\(forCaroucel[subThemeIndex].minifigureName)")
+                        .font(.title2)
+                        .bold()
+                        .padding(.leading, 16)
+                        .padding(.top, 16)
+                        .multilineTextAlignment(.leading)
+                        .lineLimit(1)
+                    Spacer()
+                }
             }
             Spacer(minLength: 25)
             HStack(){
                 Spacer(minLength: 24)
-                Image("avt011")
+                Image("\(forCaroucel[subThemeIndex].minifigureImage)")
                     .resizable()
                     .scaledToFit()
+                    .minimumScaleFactor(0.001)
                     .frame(height: 131)
                 Spacer(minLength: 28)
                 VStack{
                     HStack(){
-                        Text("Herry Poter")
+                        Text("\(forCaroucel[subThemeIndex].minifigureTheme)")
                             .font(.title3)
+                            .minimumScaleFactor(0.001)
                             .padding(.bottom, 22)
                         Spacer()
                     }
@@ -214,7 +230,8 @@ struct MinifigureModalView: View{
                         Text("Pro.Num:")
                             .multilineTextAlignment(.leading)
                         Spacer()
-                        Text("Herry Poter")
+                        Text("\(forCaroucel[subThemeIndex].minifigureImage)")
+                            .minimumScaleFactor(0.001)
                             .multilineTextAlignment(.leading)
                             .padding(.horizontal)
                     }
@@ -222,15 +239,18 @@ struct MinifigureModalView: View{
                         Text("Pro.Name:")
                             .multilineTextAlignment(.leading)
                         Spacer()
-                        Text("Herry Poter")
+                        Text("\(forCaroucel[subThemeIndex].minifigureName)")
+                            .minimumScaleFactor(0.001)
                             .multilineTextAlignment(.leading)
+                            .lineLimit(1)
                             .padding(.horizontal)
                     }
                     HStack(){
                         Text("Release Date:")
                             .multilineTextAlignment(.leading)
                         Spacer()
-                        Text("Herry Poter")
+                        Text("\(forCaroucel[subThemeIndex].minifigureCreatedDate.formatted(date: .numeric, time: .omitted))")
+                            .minimumScaleFactor(0.001)
                             .multilineTextAlignment(.leading)
                             .padding(.horizontal)
                     }
@@ -255,10 +275,13 @@ struct MinifigureModalView: View{
 // MARK: - Minifigure List View 구현부
 struct MinifigureListView: View {
     @State var scrolledID: UUID?
-    @Binding var showMinifigureModal: Bool
-    @Binding var minifigures: [minifigureItem]
     @State var subthemeFilteredMinifigs: [[minifigureItem]] = []
     @State var subThemeArray: [String] = []
+    @State var filteredSubThemeArrayInSubTheme: [[minifigureItem]] = []
+    
+    @Binding var selectedSubDetailIndex: Int
+    @Binding var showMinifigureModal: Bool
+    @Binding var minifigures: [minifigureItem]
     var body: some View {
         ScrollView(){
             ForEach(subThemeArray.indices, id: \.self){ index in
@@ -273,7 +296,8 @@ struct MinifigureListView: View {
                     VStack(){
                         HStack(){
                             NavigationLink(
-                                destination: MinifigureShelfView(minifigures: $subthemeFilteredMinifigs[index], showMinifigureModal: $showMinifigureModal)){
+                                destination: MinifigureShelfView(minifigures: $subthemeFilteredMinifigs[index], showMinifigureModal: $showMinifigureModal)
+                            ){
                                     Text("\(subTheme)")
                                         .font(.title2)
                                         .bold()
@@ -291,8 +315,8 @@ struct MinifigureListView: View {
                                 .frame(width: 393, height: 60)
                                 .offset(x: 2, y: 110.0)
                             HStack(){
-                                Carousel(minifigureImages: subthemeFilteredMinifigs[index], itemWidth: 57, itemHeight: 202, activeID: $scrolledID, showMinifigureModal: $showMinifigureModal) { item, isFocused in
-                                    MinifigureView(minifigureImage: item.minifigureImage, isFocused: isFocused, legoHeight: 170)
+                                Carousel(minifigureImages: subthemeFilteredMinifigs[index], itemWidth: 57, itemHeight: 202, selectedSubDetailIndex: $selectedSubDetailIndex, activeID: $scrolledID, showMinifigureModal: $showMinifigureModal) { item, isFocused in
+                                    MinifigureView(minifigureImage: item.minifigureImage, isFocused: isFocused, legoHeight: 170, selectedSubDetailIndex: $selectedSubDetailIndex)
                                 }
                             }.frame(width: 393, height: 180)
                         }
@@ -361,6 +385,7 @@ struct MinifigureShelfView: View{
         }
         .navigationTitle("String")
         .navigationBarTitleDisplayMode(.inline)
+        
     }
 }
 

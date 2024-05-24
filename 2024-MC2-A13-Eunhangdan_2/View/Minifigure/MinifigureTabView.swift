@@ -17,7 +17,7 @@ struct MinifigureTabView: View {
     @Query(sort: \Minifig.themeCategory) var minifigs: [Minifig]
     @State var themeArray: [String] = []
     @State var themeFilteredMinifigs: [[Minifig]] = []
-    @State var forCaroucel: [[minifigureItem]] = []
+    @State var forCaroucel: [[minifigureItem]] = [] //
     @State var subThemeArray: [String: String] = [:]
     @State var villageImage: [villageItem] = [
         .init(villageImageString: "Village", villageBackGroundColor: .yellow),
@@ -27,6 +27,7 @@ struct MinifigureTabView: View {
         .init(villageImageString: "Village", villageBackGroundColor: .green),
         .init(villageImageString: "Village", villageBackGroundColor: .brown)
     ]
+    @State var selectedDetailIndex: Int = 0 // 1차 배열
     
     let textLeftedge : CGFloat = 30
     var body: some View {
@@ -57,7 +58,7 @@ struct MinifigureTabView: View {
                             VStack{
                                 Spacer(minLength: 10)
                                 HStack(alignment: .bottom){
-                                    NavigationLink(destination: MinifigureListView(showMinifigureModal: $showMinifigureModal, minifigures: $forCaroucel[index])){
+                                    NavigationLink(destination: MinifigureListView(selectedSubDetailIndex: $selectedDetailIndex, showMinifigureModal: $showMinifigureModal, minifigures: $forCaroucel[index])){
                                         Text("\(theme)")
                                             .font(.title2)
                                             .bold()
@@ -72,14 +73,15 @@ struct MinifigureTabView: View {
                                         
                                     })
                                     .sheet(isPresented: self.$showMinifigureModal, content: {
-                                        MinifigureModalView()
+                                        MinifigureModalView(forCaroucel: $forCaroucel[selectedDetailIndex], subThemeIndex: selectedDetailIndex)
                                             .presentationDetents([.medium])
                                             .presentationDragIndicator(.visible)
                                     })
                                     Spacer()
                                 }.padding(.leading, textLeftedge)
-                                Carousel(minifigureImages: forCaroucel[index], itemWidth: 55.5, itemHeight: 104, activeID: $scrolledID, showMinifigureModal: $showMinifigureModal) { item, isFocused in
-                                    MinifigureView(minifigureImage: item.minifigureImage, isFocused: isFocused, legoHeight: 104)
+                                Carousel(minifigureImages: forCaroucel[index], itemWidth: 55.5, itemHeight: 104, selectedSubDetailIndex: $selectedDetailIndex,activeID: $scrolledID, showMinifigureModal: $showMinifigureModal) { item, isFocused in
+                                    MinifigureView(minifigureImage: item.minifigureImage, isFocused: isFocused, legoHeight: 104, selectedSubDetailIndex: $selectedDetailIndex)
+                                        
                                 }
                                 Spacer(minLength: 10)
                             }.frame(width: 393, height: 180)
@@ -108,11 +110,10 @@ struct MinifigureTabView: View {
             }
             for oneThemeMinifigArray in themeFilteredMinifigs {
                 let arr = oneThemeMinifigArray.map{
-                    return minifigureItem(minifigureImage: $0.minifigID, minifigureSubTheme: $0.splitCategory[1], minifigureTheme: $0.splitCategory[0])
+                    return minifigureItem(minifigureImage: $0.minifigID, minifigureSubTheme: $0.splitCategory[1], minifigureTheme: $0.splitCategory[0], minifigureName: $0.minifigName, minifigureIncludeSetId: $0.includedSetID, minifigureCreatedDate: $0.createdDate)
                 }
                 forCaroucel.append(arr)
             }
-            
         }
     }
 }
@@ -120,5 +121,5 @@ struct MinifigureTabView: View {
 //
 //
 #Preview {
-    MinifigureView(minifigureImage: "", legoHeight: 103)
+    MinifigureTabView()
 }
