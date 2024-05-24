@@ -2,46 +2,15 @@ import Foundation
 import SwiftUI
 
 struct SeriesDetailView: View {
-    @State var seriesTitle: String
+    @Binding var brickList: [BrickSet]
+    @Binding var miniList: [Minifig]
     
     var body: some View {
-        VStack {
-            ScrollView{
-                ForEach(0..<11) { num in
-                    HStack{
-                        Rectangle()
-                            .foregroundStyle(.pink)
-                            .frame(width: 150, height: 130)
-                        Spacer()
-                        VStack{
-                            Text("Minions - The rise of Gru")
-                            Text("")
-                            Text("Released Date: 2020.12.11")
-                        }
-                    }
-                }
-                ForEach(0..<11) { num in
-                    HStack{
-                        Rectangle()
-                            .foregroundStyle(.blue)
-                            .frame(width: 150, height: 130)
-                        Spacer()
-                        VStack{
-                            Text("Minions - The rise of Gru")
-                            Text("")
-                            Text("Released Date: 2020.12.11")
-                        }
-                    }
-                }
-                
-            }
-        }
-        .navigationTitle(seriesTitle)
-        .padding()
-        
+        searchedBrickSets(list: brickList)
+        searchedMinifigure(list: miniList)
     }
 }
 
 #Preview {
-    SeriesDetailView(seriesTitle: "Starwars")
+    SeriesDetailView(brickList: .constant([]), miniList: .constant([]))
 }
