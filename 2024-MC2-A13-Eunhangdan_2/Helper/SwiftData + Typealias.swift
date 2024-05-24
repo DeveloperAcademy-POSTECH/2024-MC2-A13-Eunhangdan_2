@@ -11,6 +11,7 @@ import SwiftData
 typealias BrickSet = ModelSchemaV1.BrickSet
 typealias Minifig = ModelSchemaV1.Minifig
 typealias BrickVillege = ModelSchemaV1.BrickVillege
+typealias Coordinate = ModelSchemaV1.Coordinate
 
 // userDefault 저장을 이용해서 앱이 첫 실행인지 확인
 func isFirstLaunch() -> Bool {
