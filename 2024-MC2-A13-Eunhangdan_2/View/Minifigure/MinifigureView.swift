@@ -198,10 +198,11 @@ struct VillageView: View{
 //MARK: - Minifigure Modal View 구현부
 struct MinifigureModalView: View{
     @Binding var minifigureForDetail : MinifigureItem
+    @State var minifigureIncludeSetID: [String] = []
     var subThemeIndex: Int
     var body: some View {
         VStack{
-            Spacer(minLength: 16.5)
+            Spacer(minLength: 40)
             ScrollView(.horizontal, showsIndicators: false){
                 HStack(){
                     Text("\(minifigureForDetail.minifigureName)")
@@ -227,35 +228,32 @@ struct MinifigureModalView: View{
                     HStack(){
                         Text("\(minifigureForDetail.minifigureTheme)")
                             .font(.title3)
+                            .bold()
                             .minimumScaleFactor(0.001)
                             .padding(.bottom, 22)
-                        Spacer()
                     }
                     HStack(){
-                        Text("Pro.Num:")
+                        Text("Num:  ")
                             .multilineTextAlignment(.leading)
                         Spacer()
                         Text("\(minifigureForDetail.minifigureImage)")
-                            .minimumScaleFactor(0.001)
                             .multilineTextAlignment(.leading)
                             .padding(.horizontal)
                     }
                     HStack(){
-                        Text("Pro.Name:")
+                        Text("SubTheme:")
                             .multilineTextAlignment(.leading)
                         Spacer()
-                        Text("\(minifigureForDetail.minifigureName)")
-                            .minimumScaleFactor(0.001)
+                        Text("\(minifigureForDetail.minifigureSubTheme)")
                             .multilineTextAlignment(.leading)
                             .lineLimit(1)
                             .padding(.horizontal)
                     }
-                    HStack(){
-                        Text("Release Date:")
+                    HStack(alignment: .top) {
+                        Text("Date: ")
                             .multilineTextAlignment(.leading)
                         Spacer()
-                        Text("\(minifigureForDetail.minifigureCreatedDate.formatted(date: .numeric, time: .omitted))")
-                            .minimumScaleFactor(0.001)
+                        Text("\(minifigureForDetail.minifigureCreatedDate.formatted(date: .abbreviated, time: .omitted))")
                             .multilineTextAlignment(.leading)
                             .padding(.horizontal)
                     }
@@ -271,9 +269,33 @@ struct MinifigureModalView: View{
                     .multilineTextAlignment(.leading)
                 Spacer()
             }
-            Rectangle()
-                .fill(Color(.gray).opacity(0.3))
-                .frame(width: 393, height: 156)
+            ZStack()
+            {
+                Rectangle()
+                    .fill(Color(.gray).opacity(0.3))
+                    .frame(width: 393, height: 200)
+                    .blur(radius: 18)
+                ScrollView(.horizontal){
+                    HStack(){
+                        ForEach(minifigureIncludeSetID.indices, id: \.self) { index in
+                            Button {
+                                
+                            } label: {
+                                Image(minifigureIncludeSetID[index])
+                                    .padding(.horizontal, 20)
+                                    .frame(height: 190)
+                                    .scaledToFit()
+                                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                                    .shadow(radius: 7)
+                                Spacer()
+                            }
+                        }
+                    }
+                }
+            }
+            Spacer()
+        }.onAppear {
+            self.minifigureIncludeSetID = minifigureForDetail.minifigureIncludeSetId
         }
     }
 }
@@ -363,6 +385,7 @@ struct MinifigureShelfView: View{
     var body: some View {
         ScrollView {
             VStack{
+                Spacer(minLength: 40)
                 ZStack{
                     LazyVGrid(columns: columns, spacing: 22) {
                         ForEach(minifigures.indices, id: \.self) { index in
@@ -393,7 +416,7 @@ struct MinifigureShelfView: View{
                 }
             }
         }
-        .navigationTitle("String")
+        .navigationTitle("\(minifigures[0].minifigureSubTheme)")
         .navigationBarTitleDisplayMode(.inline)
         
     }

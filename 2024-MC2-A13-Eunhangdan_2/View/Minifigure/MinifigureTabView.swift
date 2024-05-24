@@ -42,13 +42,9 @@ struct MinifigureTabView: View {
                             .bold()
                         Spacer()
                     }.padding(.leading, textLeftedge)
-                    
-                    
                     villageCarousel(data: villageImage, itemWidth: 315, activeID: $scrolledID, showMinifigureModal: $showMinifigureModal){item, isFocused  in
-                        
                         VillageView(villageImageString: item.villageImageString, villageBackGroundColor: item.villageBackGroundColor)
                     }.frame(width: 375,height: 245)
-                    
                     
                     Spacer(minLength: 30)
                     
@@ -88,14 +84,13 @@ struct MinifigureTabView: View {
                                     .sheet(isPresented: self.$showMinifigureModal, content: {
                                         MinifigureModalView(minifigureForDetail: $selectedMinifigItem, subThemeIndex: selectedDetailIndex)
                                             .presentationDetents([.medium])
-                                            .presentationDragIndicator(.visible)
+                                            .presentationDragIndicator(.hidden)
                                     })
                                     Spacer()
                                 }.padding(.leading, textLeftedge)
                                 
                                 Carousel(minifigureImages: minifigItemsPerTheme[index], itemWidth: 55.5, itemHeight: 104, selectedSubDetailIndex: $selectedDetailIndex,activeID: $scrolledID, selectedMinifigItem: $selectedMinifigItem, showMinifigureModal: $showMinifigureModal) { item, isFocused in
                                     MinifigureView(minifigureImage: item.minifigureImage, isFocused: isFocused, legoHeight: 104, selectedSubDetailIndex: $selectedDetailIndex)
-                                    
                                 }
                                 Spacer(minLength: 10)
                             }.frame(width: 393, height: 180)
