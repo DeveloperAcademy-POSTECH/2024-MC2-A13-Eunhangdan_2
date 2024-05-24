@@ -303,7 +303,7 @@ struct MinifigureListView: View {
                     VStack(){
                         HStack(){
                             NavigationLink(
-                                destination: MinifigureShelfView(minifigures: $subthemeFilteredMinifigs[index], showMinifigureModal: $showMinifigureModal)
+                                destination: MinifigureShelfView(minifigures: $subthemeFilteredMinifigs[index],selectedMinifigItem: $selectedMinifigItem, showMinifigureModal: $showMinifigureModal)
                             ){
                                 Text("\(subTheme)")
                                     .font(.title2)
@@ -355,6 +355,7 @@ struct MinifigureListView: View {
 //MARK: - Minifigure Shelf View 구현부
 struct MinifigureShelfView: View{
     @Binding var minifigures: [MinifigureItem]
+    @Binding var selectedMinifigItem : MinifigureItem
     @Binding var showMinifigureModal: Bool
     var itemHeight: CGFloat = 104
     let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 4)
@@ -375,6 +376,7 @@ struct MinifigureShelfView: View{
                                 HStack{
                                     Button(action: {
                                         print("3 :: mart minifigure selected")
+                                        selectedMinifigItem = minifigures[index]
                                         showMinifigureModal = true
                                     }, label: {
                                         VStack{
