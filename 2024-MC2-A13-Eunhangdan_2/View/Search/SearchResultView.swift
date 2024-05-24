@@ -30,8 +30,6 @@ struct SearchResultView: View{
                 searchedBrickSets(list: limitedBrickSetList)
                 Spacer()
                 
-                Divider()
-                
                 NavigationLink {
                     ScrollView{
                         searchedMinifigure(list: minifigsList)

@@ -1,72 +1,53 @@
 import SwiftUI
 
-func trimString(sentence: String) -> String {
-    var trimString = sentence.trimmingCharacters(in: ["\""])
-    trimString = trimString.trimmingCharacters(in: .whitespacesAndNewlines)
-    return trimString
-}
-
 @ViewBuilder
 func searchedBrickSets(list: [BrickSet]) -> some View {
     ForEach(list, id: \.setID) { set in
-        HStack{
         NavigationLink {
             BoxDetailView(brickSetID: set.setID)
         } label: {
-                AsyncImage(url: URL(string: "\(set.setImageURL)")) {image in
-                    image
-                        .resizable()
-                        .scaledToFit()
-                } placeholder: {
-                    // 김리의 프로그레스 뷰 넣기
-                }
-                .frame(width: 150, height: 120)
-                .clipped()
-                .border(.black)
-            }
-            Spacer()
-            
             HStack{
-                VStack{
-                    Text("\(trimString(sentence: set.theme)) - \(trimString(sentence: set.subtheme))\n")
-                    Text("Released Date: \(String(set.releasedDate))")
-                }
+                 getImage(id: set.setID, url: set.setImageURL)
                 Spacer()
-            }.border(.black)
-            
+                VStack(alignment: .leading){
+                    if !set.subtheme.isEmpty {
+                        Text("\(set.subtheme) ").bold()
+                    } else {
+                        Text("\(set.theme) ").bold()
+                    }
+                    Text("\nReleased year: \(String(set.releasedDate))")
+                }
+                .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
+                .frame(height: 110)
+                Spacer()
+            }
         }.padding()
+            .tint(.black)
+        Divider()
     }
 }
 
 @ViewBuilder
 func searchedMinifigure(list: [Minifig]) -> some View {
     ForEach(list, id: \.minifigID) { mini in
-        HStack {
         NavigationLink {
-//            MinifigureModalView()
+            MinifigureDetailView(mini: mini)
         } label: {
-            
-            AsyncImage(url: URL(string: "\(mini.minifigImageURL)")) {image in
-                image
-                    .resizable()
-                    .scaledToFit()
-            } placeholder: {
-                // 김리의 프로그레스 뷰 넣기
-            }
-            .frame(width: 150, height: 110)
-            .clipped()
-            .border(.black)
-        }
-            Spacer()
-            
-            HStack{
-                VStack{
-                    Text("\(trimString(sentence: mini.themeCategory))\n")
-                    Text("Name: \(trimString(sentence: mini.minifigName))")
-                }
+            HStack {
+                 getImage(id: mini.minifigID, url: mini.minifigImageURL)
                 Spacer()
-            }.border(.black)
+                VStack(alignment: .leading){
+                    Text("\(mini.themeCategory)\n").bold()
+                    Text("\(mini.minifigName)")
+                }
+                .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
+                .frame(height: 110)
+                Spacer()
+            }
         }.padding()
+            .tint(.black)
+        Divider()
     }
     
 }
+
