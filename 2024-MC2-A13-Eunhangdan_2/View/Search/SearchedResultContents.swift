@@ -13,7 +13,6 @@ func searchedBrickSets(list: [BrickSet]) -> some View {
         NavigationLink {
             BoxDetailView(brickSetID: set.setID)
         } label: {
-            
                 AsyncImage(url: URL(string: "\(set.setImageURL)")) {image in
                     image
                         .resizable()
