@@ -43,7 +43,7 @@ func loadBrickSetCSVData() -> [BrickSet] {
     
     // rows를 순회하면서 row를 columns로 쪼개기
     for row in rows {
-        let csvColumns = row.components(separatedBy: ",")
+        let csvColumns = row.components(separatedBy: ",") // 9개부터 26개까지 있음.
         if csvColumns.count == rows.first?.components(separatedBy: ",").count {
             
             let trimmedColumns = csvColumns.map {
@@ -64,7 +64,7 @@ func loadMinifigCSVData() -> [Minifig] {
     var csvToClass = [Minifig]()
     
     // CSV file 경로 얻기
-    guard let filePath = Bundle.main.path(forResource: "Brickset-minifigs-owned", ofType: "csv") else{
+    guard let filePath = Bundle.main.path(forResource: "Brickset-minifigs-owned3", ofType: "csv") else{
         print("Error: file not found")
         return []
     }
@@ -86,19 +86,20 @@ func loadMinifigCSVData() -> [Minifig] {
     
     // rows 헤더 제거
     rows.removeFirst()
+    //    print("DataNumber of Minifigs: \(rows.count)") -- 결과 671
     
     // rows를 순회하면서 row를 columns로 쪼개기
     for row in rows {
         let csvColumns = row.components(separatedBy: ",")
-        if csvColumns.count == rows.first?.components(separatedBy: ",").count {
-            
-            let trimmedColumns = csvColumns.map {
-                $0.replacingOccurrences(of: "\"" , with: "", options: .regularExpression)
-            }
-            
-            let lineClass = Minifig(raw: trimmedColumns)
-            csvToClass.append(lineClass)
+        
+        
+        let trimmedColumns = csvColumns.map {
+            $0.replacingOccurrences(of: "\"" , with: "", options: .regularExpression)
         }
+        
+        let lineClass = Minifig(raw: trimmedColumns)
+        csvToClass.append(lineClass)
+        
         
     }
     
