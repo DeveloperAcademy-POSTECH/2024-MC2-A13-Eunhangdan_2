@@ -49,10 +49,12 @@ struct SearchView: View {
         
         let brickDescriptor = FetchDescriptor<BrickSet>(predicate: setBrickPredicate)
         let minifigDescriptor = FetchDescriptor<Minifig>(predicate: setMinifigPredicate)
+        
         var limitedBrickDescriptor = FetchDescriptor<BrickSet>(predicate: setBrickPredicate)
         limitedBrickDescriptor.fetchLimit = 2
         var limitedMinifigDescriptor = FetchDescriptor<Minifig>(predicate: setMinifigPredicate)
         limitedMinifigDescriptor.fetchLimit = 2
+        
         do {
             bricks = try modelContext.fetch(brickDescriptor)
             limitedBricks = try modelContext.fetch(limitedBrickDescriptor)
