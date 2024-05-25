@@ -13,15 +13,9 @@ struct BrickVillageView: View {
     @State private var hideNavigationBar = false
     @State private var presentSheet = false
     @Query var minifigs: [Minifig] = []
-    
-    
-    // 엮을 때는 @Binding으로
-    @State private var village: BrickVillege = BrickVillege(backgroundID: UUID(), backgroundName: "village03", categoryInfo: "Town", registeredMinifigureID: ["whoAreYou", "whoAreYou", "whoAreYou"], xCoordi:[100, 300, 200], yCoordi: [200, 500, 700], rotationDegree: [-15, -90, 25])
-    
+    @Binding var village: BrickVillege
     @State private var selectedMinifigIndex: Int = 0
-    
 
-    
     var body: some View {
         ZStack {
             Image("\(village.backgroundName)")
@@ -31,7 +25,6 @@ struct BrickVillageView: View {
                     print("tapped!")
                     self.hideNavigationBar.toggle()
                 }
-            
             
             ForEach(village.registeredMinifigureID.indices , id: \.self) { index in
                 Button(action: {
@@ -133,7 +126,7 @@ struct BrickVillageView: View {
     func didDismiss() {
         // Handle the dismissing action.
     }
-}  // BrickVillageView
+}
 
 
 
@@ -151,7 +144,7 @@ struct BrickVillageView: View {
         }
     }()
     
-    return BrickVillageView()
+    return BrickVillageView(village: .constant(BrickVillege(backgroundID: UUID(), backgroundName: "village03", categoryInfo: "Town", registeredMinifigureID: ["whoAreYou", "whoAreYou", "whoAreYou"], xCoordi:[100, 300, 200], yCoordi: [200, 500, 700], rotationDegree: [-15, -90, 25])))
         .modelContainer(container)
     
     
