@@ -31,9 +31,9 @@ struct MinifigureTabView: View {
     
     @State private var villageList: [BrickVillege] = [
         BrickVillege(backgroundID: UUID(), backgroundName: "village01", categoryInfo: "Town", registeredMinifigureID: ["whoAreYou", "whoAreYou", "whoAreYou"], xCoordi:[170, 350, 300], yCoordi: [505, 750, 780], rotationDegree: [0, 0, 0]),
-        BrickVillege(backgroundID: UUID(), backgroundName: "village02", categoryInfo: "Town", registeredMinifigureID: ["whoAreYou", "whoAreYou", "whoAreYou"], xCoordi:[148, 80, 270], yCoordi: [250, 495, 780], rotationDegree: [-15, 25, 0]),
-        BrickVillege(backgroundID: UUID(), backgroundName: "village03", categoryInfo: "Town", registeredMinifigureID: ["whoAreYou", "whoAreYou", "whoAreYou"], xCoordi:[100, 300, 200], yCoordi: [200, 500, 700], rotationDegree: [-15, -90, 25]),
-        BrickVillege(backgroundID: UUID(), backgroundName: "village04", categoryInfo: "Town", registeredMinifigureID: ["whoAreYou", "whoAreYou", "whoAreYou"], xCoordi:[265, 295, 335], yCoordi: [770, 790, 780], rotationDegree: [0, 0, 0])
+        BrickVillege(backgroundID: UUID(), backgroundName: "village02", categoryInfo: "Avatar", registeredMinifigureID: ["whoAreYou", "whoAreYou", "whoAreYou", "whoAreYou"], xCoordi:[148, 80, 270, 330], yCoordi: [250, 495, 780, 770], rotationDegree: [-15, 25, 0, 10]),
+        BrickVillege(backgroundID: UUID(), backgroundName: "village03", categoryInfo: "Star Wars ", registeredMinifigureID: ["whoAreYou", "whoAreYou", "whoAreYou"], xCoordi:[100, 300, 200], yCoordi: [200, 500, 700], rotationDegree: [-15, -90, 25]),
+        BrickVillege(backgroundID: UUID(), backgroundName: "village04", categoryInfo: "Harry Potter ", registeredMinifigureID: ["whoAreYou", "whoAreYou", "whoAreYou"], xCoordi:[265, 295, 335], yCoordi: [770, 790, 780], rotationDegree: [0, 0, 0])
     ]
     
     let textLeftedge : CGFloat = 30
