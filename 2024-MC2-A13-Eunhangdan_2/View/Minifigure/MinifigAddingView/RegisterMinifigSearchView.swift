@@ -19,7 +19,9 @@ struct SearchBar: View {
     @State var getMinifig = false
     
     var body: some View {
-        HStack {
+        VStack {
+            Text("   ")
+                .frame(height: 15)
             HStack {
                 Image(systemName: "magnifyingglass")
                 
@@ -73,7 +75,8 @@ struct SearchBar: View {
             }
             .padding(EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 8))
             .foregroundColor(.secondary)
-            .background(Color(.secondarySystemBackground))
+//            .background(Color(.secondarySystemBackground))
+            .background(.gray.opacity(0.12))
             .cornerRadius(10.0)
         }
         .padding(.horizontal)

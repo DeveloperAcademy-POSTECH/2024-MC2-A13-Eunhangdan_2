@@ -31,6 +31,7 @@ struct NewLEGO: View {
                             Spacer()
                             if !isProductSelected {
                                 Text("Search")
+                                    .foregroundStyle(.gray)
                                 Image("chevron.forward")
                             } else {
                                 Text("\(String(selectedProductNumber))")
