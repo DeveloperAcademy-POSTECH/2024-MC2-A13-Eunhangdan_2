@@ -15,7 +15,7 @@ struct SwiftDataMinifigView: View {
     // 워드 작업을 하는 창(되돌리기 등) = context
     @Environment (\.modelContext) private var modelContext
     // @Query 어노테이션을 이용해서 container에 데이터를 불러올 수 있음 (get only)
-    @Query(sort: \Minifig.minifigID) var minifigs : [Minifig]
+    @Query(sort: \Minifig.createdDate, order: .reverse) var minifigs : [Minifig]
     
     var body: some View {
         NavigationSplitView {
@@ -38,6 +38,19 @@ struct SwiftDataMinifigView: View {
                         
                         HStack{
                             Text("미니피규어 이름 : \(minifig.minifigName)")
+                            Spacer()
+                        }
+                        .padding(8)
+                        
+                        
+                        HStack{
+                            Text("category : \(minifig.themeCategory)")
+                            Spacer()
+                        }
+                        .padding(8)
+                        HStack{
+                            Text("splitted[0] : \(minifig.splitCategory[0])")
+                            Text("splitted[1] : \(minifig.splitCategory[1])")
                             Spacer()
                         }
                         .padding(8)
@@ -69,8 +82,6 @@ struct SwiftDataMinifigView: View {
             }
 
             .listStyle(.plain)
-            
-            
             
             Spacer()
         } detail: {

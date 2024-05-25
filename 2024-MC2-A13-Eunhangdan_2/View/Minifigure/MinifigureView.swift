@@ -36,6 +36,7 @@ struct Carousel<Content: View, minifigImages: RandomAccessCollection>: View wher
     @Binding var selectedMinifigItem : MinifigureItem
     @Binding var showMinifigureModal: Bool
     @ViewBuilder var content: (minifigImages.Element, Bool) -> Content
+
     
     var body: some View {
         GeometryReader {
@@ -164,12 +165,27 @@ struct MinifigureView: View {
     @Binding var selectedSubDetailIndex: Int
     
     var body: some View {
-        Image(minifigureImage)
-            .resizable()
-            .font(.body)
-            .scaledToFit()
+        
+        if let imageExists = UIImage(named: "\(minifigureImage)") {
+            Image(minifigureImage)
+                .resizable()
+                .font(.body)
+                .scaledToFit()
+                .bold(isFocused)
+                .frame(height: legoHeight)
+        } else {
+            //TODO: getting Data and show as Image later
+            AsyncImage(url: URL(string: "https://img.bricklink.com/ItemImage/MN/0/\(minifigureImage).png")) {image in
+                image
+                    .resizable()
+                    .scaledToFit()
+            } placeholder: {
+                // Progress View
+            }
             .bold(isFocused)
             .frame(height: legoHeight)
+            .clipped()
+        }
     }
 }
 //MARK: - VillageView 구현부

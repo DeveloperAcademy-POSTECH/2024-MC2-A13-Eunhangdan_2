@@ -113,6 +113,7 @@ struct RegisterMinifigSearchView: View {
                             Button("Select") {
                                 minifigItem.minifigID = minifig.minifigNumber
                                 minifigItem.minifigName = minifig.name
+                                minifigItem.themeCategory = minifig.category
                                 
                                 presentationMode.wrappedValue.dismiss()
                             }

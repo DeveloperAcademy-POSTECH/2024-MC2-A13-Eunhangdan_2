@@ -5,7 +5,7 @@ struct SearchLEGOBoxForAdding: View {
     @Binding var searchText: String
     @Binding var selectedProductNumber: Int
     @Binding var isProductSelected: Bool
-    @State var setList: [BrickSetApiModel.Set] = []
+    @Binding var setList: [BrickSetApiModel.Set]
     @State private var brickNumber: String = ""
     var networkManager = NetworkManager.shared
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -77,12 +77,9 @@ struct SearchLEGOBoxForAdding: View {
             Spacer()
         }
         
-        
-        
-        
     }
 }
 
 #Preview {
-    SearchLEGOBoxForAdding(searchText: .constant("43222"), selectedProductNumber: .constant(43222), isProductSelected: .constant(false), setList: [])
+    SearchLEGOBoxForAdding(searchText: .constant("43222"), selectedProductNumber: .constant(43222), isProductSelected: .constant(false), setList: .constant([]))
 }

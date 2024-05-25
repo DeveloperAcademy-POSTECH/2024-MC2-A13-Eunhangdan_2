@@ -38,6 +38,9 @@ struct MinifigureTabView: View {
     
     let textLeftedge : CGFloat = 30
     
+    @State var boxAddViewPresented = false
+    @State var minifigAddViewPresented = false
+    
     var body: some View {
         NavigationStack(){
             ScrollView{
@@ -113,6 +116,33 @@ struct MinifigureTabView: View {
                 }
                 .navigationBarTitle("Minifigures")
                 .navigationSplitViewStyle(.automatic)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Menu {
+                            Button(action: {
+                                boxAddViewPresented = true
+                            }) {
+                                Text("Add LEGO")
+                                Image("shippingboxplus")
+                            }
+                            Button(action: {
+                                minifigAddViewPresented = true
+                            }) {
+                                Text("Add Minifigures")
+                                Image("batteryblockplus")
+                            }
+                        } label: {
+                            Image(systemName: "plus")
+                        }
+                    }
+                }
+                .sheet(isPresented: $boxAddViewPresented) {
+                    NewLEGO()
+                }.sheet(isPresented: $minifigAddViewPresented) {
+                    NavigationStack {
+                        RegisterMinifigureView()
+                    }
+                }
                 .padding()
             }
         }
