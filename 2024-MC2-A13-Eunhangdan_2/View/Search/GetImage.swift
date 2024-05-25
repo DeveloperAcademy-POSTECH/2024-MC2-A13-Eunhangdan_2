@@ -3,7 +3,7 @@ import SwiftUI
 
 @ViewBuilder
 func getImage(id: String, url: String) -> some View {
-    if let imageExists = UIImage(named: "\(id)") {
+    if UIImage(named: "\(id)") != nil {
         Image("\(id)")
             .resizable()
             .scaledToFit()

@@ -16,7 +16,7 @@ struct BoxDetailTextView: View {
         
         ScrollView {
             VStack(alignment: .leading){
-                if let imageExists = UIImage(named: "\(brickSet.setID)") {
+                if UIImage(named: "\(brickSet.setID)") != nil {
                     Image(brickSet.setID)
                         .resizable()
                         .scaledToFit()

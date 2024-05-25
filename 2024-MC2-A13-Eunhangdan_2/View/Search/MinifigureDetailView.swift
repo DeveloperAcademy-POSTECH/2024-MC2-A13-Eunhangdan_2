@@ -12,7 +12,7 @@ struct MinifigureDetailView: View {
 
     var body: some View {
             VStack {
-                if let imageExists = UIImage(named: "\(mini.minifigID)") {
+                if UIImage(named: "\(mini.minifigID)") != nil {
                     Image("\(mini.minifigID)")
                         .resizable()
                         .scaledToFit()

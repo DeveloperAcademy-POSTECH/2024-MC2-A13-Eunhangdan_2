@@ -151,7 +151,7 @@ struct NavigationImage: View {
             BoxDetailView(brickSetID: imgString)
         }) {
             
-            if let imageExists = UIImage(named: "\(imgString)") {
+            if UIImage(named: "\(imgString)") != nil {
                 Image(imgString)
                     .resizable()
                     .frame(width: height, height: height)

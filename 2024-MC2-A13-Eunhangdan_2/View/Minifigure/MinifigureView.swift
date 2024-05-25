@@ -165,7 +165,7 @@ struct MinifigureView: View {
     @Binding var selectedSubDetailIndex: Int
     
     var body: some View {
-        if let imageExists = UIImage(named: "\(minifigureImage)") {
+        if UIImage(named: "\(minifigureImage)") != nil {
             Image(minifigureImage)
                 .resizable()
                 .font(.body)
@@ -250,7 +250,7 @@ struct MinifigureModalView: View{
             HStack(){
                 Spacer(minLength: 24)
                 
-                if let imageExists = UIImage(named: "\(minifigureForDetail.minifigureImage)") {
+                if UIImage(named: "\(minifigureForDetail.minifigureImage)") != nil {
                     Image("\(minifigureForDetail.minifigureImage)")
                         .resizable()
                         .scaledToFit()
@@ -452,7 +452,7 @@ struct MinifigureShelfView: View{
                                     }, label: {
                                         VStack{
                                             //여기
-                                            if let imageExists = UIImage(named: "\(minifigures[index].minifigureImage)") {
+                                            if UIImage(named: "\(minifigures[index].minifigureImage)") != nil {
                                                 Image(minifigures[index].minifigureImage)
                                                     .resizable()
                                                     .scaledToFit()
