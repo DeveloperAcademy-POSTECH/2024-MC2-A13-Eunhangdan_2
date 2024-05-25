@@ -110,12 +110,17 @@ struct RegisterMinifigSearchView: View {
                             .clipShape(.rect(cornerRadius: 25))
                             Text("Minifig Name : \(minifig.name)")
                                 .padding(.vertical, 16)
-                            Button("Select") {
+                            Button {
                                 minifigItem.minifigID = minifig.minifigNumber
                                 minifigItem.minifigName = minifig.name
                                 minifigItem.themeCategory = minifig.category
                                 
                                 presentationMode.wrappedValue.dismiss()
+                            } label: {
+                                Text("Select")
+                                    .padding(5)
+                                    .background(.gray.opacity(0.12))
+                                    .clipShape(RoundedRectangle(cornerRadius: 12))
                             }
                         }
                     }
