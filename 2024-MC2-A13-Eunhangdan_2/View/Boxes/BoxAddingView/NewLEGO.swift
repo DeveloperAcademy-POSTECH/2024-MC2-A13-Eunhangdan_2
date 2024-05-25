@@ -24,7 +24,7 @@ struct NewLEGO: View {
                 HStack{
                     Text("LEGO Number")
                     NavigationLink {
-                        SearchLEGOBoxForAdding(searchText: $searchText, selectedProductNumber: $selectedProductNumber, isProductSelected: $isProductSelected)
+                        SearchLEGOBoxForAdding(searchText: $searchText, selectedProductNumber: $selectedProductNumber, isProductSelected: $isProductSelected, setList: $setList)
                             .navigationTitle("LEGO Number Search").navigationBarTitleDisplayMode(.inline)
                     } label: {
                         HStack {
@@ -56,18 +56,6 @@ struct NewLEGO: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing){
                     Button(action: {
-                        if String(selectedProductNumber) == "" {return}
-                        networkManager.fetchBrick(searchString: String(selectedProductNumber)) { result in
-                            switch result {
-                            case .success(let sets):
-                                setList.removeAll()
-                                for set in sets {
-                                    setList.append(set)
-                                }
-                            case .failure(let error):
-                                print("Error: \(error)")
-                            }
-                        }
                         for set in setList {
                             let bricksSet = BrickSet(setID: String(selectedProductNumber), theme: set.theme, subtheme: set.subtheme ?? "", setName: set.name, pieces: set.pieces ?? 0, isAssembled: isAssembled, price: 0.00,  minifigureIdList: [], setImageURL: set.image.imageURL, isFavorite: false, isOwned: true, photos: [], purchaseDate: date, releasedDate: set.year)
                             

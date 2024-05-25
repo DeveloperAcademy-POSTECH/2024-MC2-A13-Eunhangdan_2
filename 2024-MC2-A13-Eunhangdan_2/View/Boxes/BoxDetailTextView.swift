@@ -16,10 +16,23 @@ struct BoxDetailTextView: View {
         
         ScrollView {
             VStack(alignment: .leading){
-                Image(brickSet.setID)
-                    .resizable()
-                    .scaledToFit()
+                if let imageExists = UIImage(named: "\(brickSet.setID)") {
+                    Image(brickSet.setID)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 346)
+                } else {
+                    //TODO: getting Data and show as Image later
+                    AsyncImage(url: URL(string: "https://images.brickset.com/sets/small/\(brickSet.setID)-1.jpg")) {image in
+                        image
+                            .resizable()
+                            .scaledToFit()
+                    } placeholder: {
+                        // Progress View
+                    }
                     .frame(width: 346)
+                    .clipped()
+                }
                 
                 Spacer()
                     .frame(height: 32)

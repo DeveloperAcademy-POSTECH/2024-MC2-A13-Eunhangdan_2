@@ -108,7 +108,7 @@ enum ModelSchemaV1: VersionedSchema {
             self.isFavorite = false
             self.isOwned = true
             self.photos = []
-            self.purchaseDate = Date()
+            self.purchaseDate = Date().addingTimeInterval(-86400) // 초기화 때에 현재시점보다 하루 전으로 설정한다. 
             self.releasedDate = Int(raw[3])!
             self.discontinuedDate = discontinuedDate
         }

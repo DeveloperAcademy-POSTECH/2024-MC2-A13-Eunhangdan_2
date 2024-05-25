@@ -150,10 +150,24 @@ struct NavigationImage: View {
         NavigationLink(destination:{
             BoxDetailView(brickSetID: imgString)
         }) {
-            Image(imgString)
-                .resizable()
+            
+            if let imageExists = UIImage(named: "\(imgString)") {
+                Image(imgString)
+                    .resizable()
+                    .frame(width: height, height: height)
+                    .scaledToFit()
+            } else {
+                //TODO: getting Data and show as Image later
+                AsyncImage(url: URL(string: "https://images.brickset.com/sets/small/\(imgString)-1.jpg")) {image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                } placeholder: {
+                    // Progress View
+                }
                 .frame(width: height, height: height)
-                .scaledToFit()
+                .clipped()
+            }
         }
     }
 }

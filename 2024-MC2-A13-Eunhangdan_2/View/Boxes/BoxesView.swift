@@ -11,7 +11,7 @@ import SwiftData
 
 struct BoxesContainerView : View {
     
-    @State private var sortOrder = SortDescriptor(\BrickSet.setID)
+    @State private var sortOrder = SortDescriptor(\BrickSet.purchaseDate)
     @State var filterOption: FilterType = .none
     
     @State var boxAddViewPresented = false
@@ -20,6 +20,7 @@ struct BoxesContainerView : View {
     @State var firstSortOption = "checkmark"
     @State var secondSortOption = ""
     @State var thirdSortOption = ""
+    @State var recentSortOption = ""
     
     
     var body: some View {
@@ -30,13 +31,25 @@ struct BoxesContainerView : View {
                         
                         Menu {
                             Button {
-                                self.sortOrder = SortDescriptor(\BrickSet.setID)
+                                self.sortOrder = SortDescriptor(\BrickSet.purchaseDate)
                                 self.filterOption = .none
                                 self.firstSortOption = "checkmark"
                                 self.secondSortOption = ""
                                 self.thirdSortOption = ""
+                                self.recentSortOption = ""
                             } label: {
                                 Label("All LEGO", systemImage: "\(firstSortOption)")
+                            }
+                            
+                            Button {
+                                self.sortOrder = SortDescriptor(\BrickSet.purchaseDate, order: .reverse)
+                                self.filterOption = .none
+                                self.firstSortOption = ""
+                                self.secondSortOption = ""
+                                self.thirdSortOption = ""
+                                self.recentSortOption = "checkmark"
+                            } label: {
+                                Label("Recent", systemImage: "\(recentSortOption)")
                             }
                             
                             Button {
@@ -44,6 +57,7 @@ struct BoxesContainerView : View {
                                 self.firstSortOption = ""
                                 self.secondSortOption = "checkmark"
                                 self.thirdSortOption = ""
+                                self.recentSortOption = ""
                             } label: {
                                 Label("Assembled", systemImage: "\(secondSortOption)")
                             }
@@ -53,14 +67,15 @@ struct BoxesContainerView : View {
                                 self.firstSortOption = ""
                                 self.secondSortOption = ""
                                 self.thirdSortOption = "checkmark"
+                                self.recentSortOption = ""
                             }) {
                                 Label("My Favorite", systemImage: "\(thirdSortOption)")
                             }
                         } label: {
                             Image(systemName: "line.3.horizontal.decrease.circle")
                         }
-                        
-                    }  // 필터 메뉴
+                    }
+                    
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Menu {
                             Button(action: {
@@ -78,7 +93,7 @@ struct BoxesContainerView : View {
                         } label: {
                             Image(systemName: "plus")
                         }
-                    }  // 레고등록/미니피규어 등록 -> Collection 추가화면으로 이
+                    }
                 }
         }
         
