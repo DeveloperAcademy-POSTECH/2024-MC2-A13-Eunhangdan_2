@@ -62,7 +62,7 @@ struct SearchLEGOBoxForAdding: View {
                                 presentationMode.wrappedValue.dismiss()
                                 isProductSelected = true
                             } label: {
-                                Text("Choose")
+                                Text("Select")
                                     .padding(5)
                                     .background(.gray.opacity(0.12))
                                     .clipShape(RoundedRectangle(cornerRadius: 12))

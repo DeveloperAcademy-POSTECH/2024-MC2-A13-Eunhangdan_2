@@ -52,7 +52,6 @@ struct BrickVillageView: View {
         }
         .sheet(isPresented: $presentSheet, onDismiss: didDismiss) {
             ScrollView {
-                Spacer(minLength: 16)
                 // sheet_title
                 HStack {
                     Text("Select Minifigures")

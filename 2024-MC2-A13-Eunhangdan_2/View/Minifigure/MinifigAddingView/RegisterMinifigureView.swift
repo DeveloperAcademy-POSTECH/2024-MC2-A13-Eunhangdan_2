@@ -42,8 +42,7 @@ struct RegisterMinifigureView: View {
                     }
                     
                     presentationMode.wrappedValue.dismiss()
-                    
-                }
+                }.disabled(minifigItem.minifigID == "" ? true : false)
             }
         }
         .navigationTitle("New Minifigure")
