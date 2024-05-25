@@ -118,7 +118,7 @@ struct Carousel<Content: View, minifigImages: RandomAccessCollection>: View wher
     }
 }
 //MARK: - village Carousel 구현부
-struct villageCarousel<Content: View, Items: RandomAccessCollection>: View where Items.Element: Identifiable {
+struct VillageCarousel<Content: View, Items: RandomAccessCollection>: View where Items.Element: Identifiable {
     var data: Items
     var itemWidth: CGFloat
     @Binding var activeID: UUID?
