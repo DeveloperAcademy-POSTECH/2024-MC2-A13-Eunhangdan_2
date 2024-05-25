@@ -165,7 +165,6 @@ struct MinifigureView: View {
     @Binding var selectedSubDetailIndex: Int
     
     var body: some View {
-        
         if let imageExists = UIImage(named: "\(minifigureImage)") {
             Image(minifigureImage)
                 .resizable()
@@ -452,10 +451,26 @@ struct MinifigureShelfView: View{
                                         showMinifigureModal = true
                                     }, label: {
                                         VStack{
-                                            Image(minifigures[index].minifigureImage)
-                                                .resizable()
-                                                .scaledToFit()
+                                            //여기
+                                            if let imageExists = UIImage(named: "\(minifigures[index].minifigureImage)") {
+                                                Image(minifigures[index].minifigureImage)
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(height: itemHeight)
+                                            } else {
+                                                AsyncImage(url: URL(string: "https://img.bricklink.com/ItemImage/MN/0/\(minifigures[index].minifigureImage).png")) {image in
+                                                    image
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                } placeholder: {
+                                                    // Progress View
+                                                }
+                                                .minimumScaleFactor(0.001)
                                                 .frame(height: itemHeight)
+                                                .clipped()
+                                            }
+                                            
+                                            
                                         }
                                     })
                                 }
