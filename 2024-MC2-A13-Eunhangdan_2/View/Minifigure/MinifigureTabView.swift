@@ -30,10 +30,10 @@ struct MinifigureTabView: View {
     @State var selectedMinifigItem: MinifigureItem = MinifigureItem(minifigureImage: "", minifigureSubTheme: "", minifigureTheme: "", minifigureName: "", minifigureIncludeSetId: [], minifigureCreatedDate: Date())
     
     @State private var villageList: [BrickVillege] = [
-        BrickVillege(backgroundID: UUID(), backgroundName: "village01", categoryInfo: "Town", registeredMinifigureID: ["whoAreYou", "whoAreYou", "whoAreYou"], xCoordi:[100, 300, 200], yCoordi: [200, 500, 700], rotationDegree: [-15, -90, 25]),
-        BrickVillege(backgroundID: UUID(), backgroundName: "village02", categoryInfo: "Town", registeredMinifigureID: ["whoAreYou", "whoAreYou", "whoAreYou"], xCoordi:[100, 300, 200], yCoordi: [200, 500, 700], rotationDegree: [-15, -90, 25]),
+        BrickVillege(backgroundID: UUID(), backgroundName: "village01", categoryInfo: "Town", registeredMinifigureID: ["whoAreYou", "whoAreYou", "whoAreYou"], xCoordi:[170, 350, 300], yCoordi: [505, 750, 780], rotationDegree: [0, 0, 0]),
+        BrickVillege(backgroundID: UUID(), backgroundName: "village02", categoryInfo: "Town", registeredMinifigureID: ["whoAreYou", "whoAreYou", "whoAreYou"], xCoordi:[148, 80, 270], yCoordi: [250, 495, 780], rotationDegree: [-15, 25, 0]),
         BrickVillege(backgroundID: UUID(), backgroundName: "village03", categoryInfo: "Town", registeredMinifigureID: ["whoAreYou", "whoAreYou", "whoAreYou"], xCoordi:[100, 300, 200], yCoordi: [200, 500, 700], rotationDegree: [-15, -90, 25]),
-        BrickVillege(backgroundID: UUID(), backgroundName: "village04", categoryInfo: "Town", registeredMinifigureID: ["whoAreYou", "whoAreYou", "whoAreYou"], xCoordi:[100, 300, 200], yCoordi: [200, 500, 700], rotationDegree: [-15, -90, 25])
+        BrickVillege(backgroundID: UUID(), backgroundName: "village04", categoryInfo: "Town", registeredMinifigureID: ["whoAreYou", "whoAreYou", "whoAreYou"], xCoordi:[265, 295, 335], yCoordi: [770, 790, 780], rotationDegree: [0, 0, 0])
     ]
     
     let textLeftedge : CGFloat = 30
@@ -50,7 +50,7 @@ struct MinifigureTabView: View {
                     }.padding(.leading, textLeftedge)
                     
                     
-                    villageCarousel(data: villageImage, itemWidth: 315, activeID: $scrolledID,
+                    VillageCarousel(data: villageImage, itemWidth: 315, activeID: $scrolledID,
                                    // villages: $villageList,
                                     showMinifigureModal: $showMinifigureModal){item, isFocused, index  in
                         NavigationLink {
