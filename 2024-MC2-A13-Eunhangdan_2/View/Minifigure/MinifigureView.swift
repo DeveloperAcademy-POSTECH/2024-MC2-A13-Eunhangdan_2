@@ -250,11 +250,28 @@ struct MinifigureModalView: View{
             Spacer(minLength: 25)
             HStack(){
                 Spacer(minLength: 24)
-                Image("\(minifigureForDetail.minifigureImage)")
-                    .resizable()
-                    .scaledToFit()
+                
+                if let imageExists = UIImage(named: "\(minifigureForDetail.minifigureImage)") {
+                    Image("\(minifigureForDetail.minifigureImage)")
+                        .resizable()
+                        .scaledToFit()
+                        .minimumScaleFactor(0.001)
+                        .frame(height: 131)
+                } else {
+                    //TODO: getting Data and show as Image later
+                    AsyncImage(url: URL(string: "https://img.bricklink.com/ItemImage/MN/0/\(minifigureForDetail.minifigureImage).png")) {image in
+                        image
+                            .resizable()
+                            .scaledToFit()
+                    } placeholder: {
+                        // Progress View
+                    }
                     .minimumScaleFactor(0.001)
                     .frame(height: 131)
+                    .clipped()
+                }
+                
+                
                 Spacer(minLength: 28)
                 VStack{
                     HStack(){
