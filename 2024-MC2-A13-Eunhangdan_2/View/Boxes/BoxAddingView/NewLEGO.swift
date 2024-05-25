@@ -57,9 +57,12 @@ struct NewLEGO: View {
                 ToolbarItem(placement: .topBarTrailing){
                     Button(action: {
                         for set in setList {
-                            let bricksSet = BrickSet(setID: String(selectedProductNumber), theme: set.theme, subtheme: set.subtheme ?? "", setName: set.name, pieces: set.pieces ?? 0, isAssembled: isAssembled, price: 0.00,  minifigureIdList: [], setImageURL: set.image.imageURL, isFavorite: false, isOwned: true, photos: [], purchaseDate: date, releasedDate: set.year)
-                            
-                            createBrickSet(bricksSet)
+                            // 검색 리스트 품목 중 선택한 것과 같은 품목만
+                            if set.setID == selectedProductNumber {
+                                let bricksSet = BrickSet(setID: String(selectedProductNumber), theme: set.theme, subtheme: set.subtheme ?? "", setName: set.name, pieces: set.pieces ?? 0, isAssembled: isAssembled, price: 0.00,  minifigureIdList: [], setImageURL: set.image.imageURL, isFavorite: false, isOwned: true, photos: [], purchaseDate: date, releasedDate: set.year)
+                                
+                                createBrickSet(bricksSet)
+                            }
                         }
                         
                         presentationMode.wrappedValue.dismiss()
