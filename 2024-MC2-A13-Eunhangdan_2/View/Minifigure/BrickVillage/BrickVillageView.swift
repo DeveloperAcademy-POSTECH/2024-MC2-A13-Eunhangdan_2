@@ -107,7 +107,7 @@ struct BrickVillageView: View {
             
         }
         .navigationBarHidden(hideNavigationBar)
-        .navigationBarTitle("Hogwarts Moment Class", displayMode: .inline)
+        .navigationBarTitle("LEGO Village", displayMode: .inline)
         .edgesIgnoringSafeArea([.top, .bottom])
         .toolbar(.hidden, for: .tabBar)
         .onDisappear {

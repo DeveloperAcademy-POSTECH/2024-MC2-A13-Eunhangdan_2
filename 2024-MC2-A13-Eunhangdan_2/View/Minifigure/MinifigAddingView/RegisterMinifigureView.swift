@@ -33,7 +33,7 @@ struct RegisterMinifigureView: View {
         }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Button("ADD") {
+                Button("Add") {
                     do {
                         modelContext.insert(minifigItem)
                         try modelContext.save()
